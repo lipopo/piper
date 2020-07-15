@@ -1,0 +1,11 @@
+# virtualenv
+venv/
+
+# compile files
+*.pyc
+__pycache__/
+virtualenv
+*.egg-info/
+
+# idea configuration
+.ycm_extra_config.py
