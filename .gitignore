@@ -8,4 +8,10 @@ virtualenv
 *.egg-info/
 
 # idea configuration
-.ycm_extra_config.py
+.ycm_extra_conf.py
+
+# Jupyter chk
+.ipynb_checkpoints/
+
+# swap file
+*.swp
