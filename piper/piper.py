@@ -57,7 +57,8 @@ class Piper:
 
         for k, v in _meta_info.get("piper", {}).items():
             _piper = cls.getPiper(v.get("type", "base"))
-            _piper.setMetaInfo(v.get("meta_info"))
+            if v.get("meta_info"):
+                _piper.setMetaInfo(v.get("meta_info"))
             _pipers_list[v.get("idx", 0)] = _piper
 
         # link pipers
