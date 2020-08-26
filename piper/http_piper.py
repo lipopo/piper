@@ -4,6 +4,7 @@ from piper.piper import Piper
 
 
 class HttpPiper(Piper):
+    name = "http"
 
     meta_info = {
         "method": "GET", 
