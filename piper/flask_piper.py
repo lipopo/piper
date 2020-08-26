@@ -44,6 +44,7 @@ class FlaskPiper(Piper):
             "meta_info": self.meta_info,
             "args": request.args,
             "json": request.json,
+            "form": request.form,
             "path": request.path,
             "method": request.method
         }

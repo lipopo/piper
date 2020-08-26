@@ -27,6 +27,7 @@ class MockRequest:
     json = "json"
     path = "path"
     method = "method"
+    form = "form"
 
 
 mock_app = MockApp()
@@ -59,6 +60,7 @@ class FlaskPiperTestCase(TestCase):
         self.assertEqual(_data.get("json"), "json")
         self.assertEqual(_data.get("path"), "path")
         self.assertEqual(_data.get("method"), "method")
+        self.assertEqual(_data.get("form"), "form")
         self.assertEqual(_data.get("meta_info"), self._flask_piper.meta_info)
     
     @patch("piper.flask_piper.FlaskPiper.app", mock_app)
