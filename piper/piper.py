@@ -1,3 +1,4 @@
+from copy import deepcopy
 import json
 from zipfile import ZipFile, is_zipfile
 
@@ -108,8 +109,9 @@ class SplitPiper(Piper):
     def next(self, data):
         """处理跳转
         """
+        # copy data
         for _pipe in self.target_pipes or []:
-            _pipe(data)
+            _pipe(deepcopy(data))
 
 
 class ConcatePiper(Piper):
