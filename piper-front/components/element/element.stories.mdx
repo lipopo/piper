@@ -1,0 +1,83 @@
+import { Meta, Preview, Story } from '@storybook/addon-docs/blocks';
+
+import ElementComponent from './Element.vue';
+import ElementControl from './ElementControl.vue';
+import ElementFlow from './ElementFlow.vue';
+import { Element } from '../../lib/index.coffee';
+
+<Meta title='Component/Element'/>
+
+
+# Component
+
+## Element
+
+通用的element构件
+
+### NormalElement
+
+Element控件
+
+<Preview>
+    <Story name='normal-element'>{{
+        components: {
+            ElementComponent
+        },
+        template: `<element-component :element='element'></element-component>`,
+        props: {
+            element: {
+                type: Object,
+                default: () => {
+                    return new Element(
+                        0, 'Normal Element', 'input', {}
+                    );
+                }
+            }
+        }
+    }}</Story>
+</Preview>
+
+### ElementControl
+
+元素外层控件
+
+<Preview>
+    <Story name='element-control'>{{
+        components: {
+            ElementControl
+        },
+        template: `<element-control :element='element' @del='del' @newele='new_ele'></element-control>`,
+        props: {
+            element: {
+                type: Object,
+                default: () => {
+                    return new Element(
+                        0, 'Element With Control', 'input', {}
+                    )
+                }
+            }
+        },
+        methods: {
+            del: (ele) => {
+                console.log('delete -',ele);
+            },
+            new_ele: (ele) => {
+                console.log('newele -', ele);
+            }
+        }
+    }}</Story>
+</Preview>
+
+
+### ElementFlow
+
+element组合的构件
+
+<Preview>
+    <Story name='element-flow'>{{
+        components: {
+            ElementFlow
+        },
+        template: `<element-flow></element-flow>`
+    }}</Story>
+</Preview>
