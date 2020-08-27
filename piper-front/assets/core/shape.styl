@@ -1,0 +1,22 @@
+$shapes = {
+    straight: {
+        border-radius: 0px
+    },
+    smell: {
+        border-radius: 5px
+    },
+    middle: {
+        border-radius: 15px
+    },
+    large: {
+        border-radius: 25px
+    },
+    total: {
+        border-radius: 50%
+    }
+}
+
+
+for $shape, $radius in $shapes
+    .s-{$shape}
+        {$radius}

@@ -1,0 +1,15 @@
+$depthes = {
+    depth: 1 2 3 4 5 6 7 8 9,
+    color: #eee #ddd #ccc #bbb #aaa #999
+}
+
+for $dep in $depthes['depth']
+    for $color, $cidx in $depthes['color']
+        .d{$dep}-c{$cidx}
+            box-shadow s('%spx %spx %s', $dep, $dep, $color)
+    
+        .d{$dep}-c{$cidx}-y
+            box-shadow s('%spx 0px %s', $dep, $color)
+
+        .d{$dep}-c{$cidx}-x
+            box-shadow s('0px %spx %s', $dep, $color)

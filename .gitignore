@@ -1,3 +1,6 @@
+# cache
+.cache/
+
 # virtualenv
 venv/
 
@@ -6,6 +9,7 @@ venv/
 __pycache__/
 virtualenv
 *.egg-info/
+dist/
 
 # idea configuration
 .ycm_extra_conf.py
@@ -15,3 +19,6 @@ virtualenv
 
 # swap file
 *.swp
+
+# packages
+node_modules/

@@ -1,0 +1,31 @@
+$trans = {
+    delay: {
+        d0: 0
+        d1: 100ms
+        d2: 200ms
+        d3: 300ms
+        d4: 400ms
+        d5: 500ms
+    },
+    tfunc: {
+        e: 'ease'
+        ei: 'ease-in'
+        eo: 'ease-out'
+        eio: 'ease-in-out'
+    },
+    duration: {
+        d1: 100ms,
+        d2: 200ms,
+        d3: 300ms,
+        d4: 400ms,
+        d5: 500ms
+    }
+}
+
+for $dname, $delay in $trans['delay']
+    for $fname, $func in $trans['tfunc']
+        for $dura, $dur in $trans['duration']
+            .t-{$dname}-{$dura}-{$fname}
+                transition-duration $dur
+                transition-delay $delay
+                transition-timing-function $func

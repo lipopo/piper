@@ -1,0 +1,14 @@
+rfunc()
+    props = arguments
+    transform: s('rotate%s(%sdeg)', props[1], props[0])
+
+
+$rotates = {
+    direction: X Y Z,
+    angle: 30 45 60 90 120 150 135 180 210 225 240 270 300 315 330
+}
+
+for $dir in $rotates['direction']
+    for $angle in $rotates['angle']
+        .r-{$dir}-{$angle}
+            rfunc $angle, $dir
