@@ -1,6 +1,8 @@
 <template lang='pug'>
 div.element(ref='ele')
-  div.element-header(:class="element_style" @click="change_status") {{ type ? `${name} (${type})` : name}}
+  div.element-header(:class="element_style")
+    div.element-header-content(@click="change_status") {{ type ? `${name} (${type})` : name}}
+    slot(name='append') 
   div.sub-items(:style="{display: active ? 'block' : 'none'}")
     div.element-name
       input(v-model="name" @input="change_name" @change="change_name")
@@ -73,6 +75,9 @@ export default App
   .element-header
     color #fff
     cursor pointer
+
+    display flex
+    align-items center
 
   .sub-items
     padding 15px

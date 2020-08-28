@@ -1,11 +1,16 @@
 <template lang='pug'>
 div.element-control(ref='elc')
-  element-component(:element='element')
-  div.delete-button(@click='delete_element') x
+  div.source-link-row(v-if="element.source_element.length > 0")
+  div.link-row(v-if="element.target_element.length > 0")
+  element-component(
+    :element='element'
+  )
+    template(v-slot:append)
+      div.delete-button(@click='delete_element') x
   div.link-button(
     v-if='can_link'
     @click='link_new_element'
-    ) +
+  ) +
 
 </template>
 
@@ -46,22 +51,68 @@ export default App
 
 <style lang='stylus'>
 @import '../../assets/core/color.styl'
+@import './variable.styl'
 
 .element-control
-  @extend .b-info-darkest
-  border-width 1px
-  border-style dashed
-
-  padding calc(1rem + 4px)
-
   position relative
 
-  .delete-button
+  .source-link-row
+    @extend .b-info-darkest
+    border-left-width 4px
+    border-left-style solid
+
     position absolute
+    left 50%
+    height ($channel-space / 2 - 5px)
+    top -($channel-space / 2 + 5px)
+
+    &:before
+      content ''
+      height 0
+      width 100px
+
+      position absolute
+      top 0
+      left calc(50% + 1px)
+      
+      @extend .b-info-darkest
+      border-top-width 5px
+      border-top-style solid
+
+    &:after
+      content ''
+      height 0 
+      width 0
+
+      @extend .b-info-darkest
+      border-width 8px
+      border-style solid
+      border-bottom-color transparent
+      border-left-color transparent
+      border-right-color transparent
+
+      position absolute
+      top calc(100% + 1px)
+      transform translate(calc(-50% - 2px), 0)
+
+  .link-row
+    @extend .b-info-darkest
+    border-left-width 4px
+
+    border-left-style solid
+
+    position absolute
+    top calc(100% + 1px)
+    left 50%
+    height ($channel-space / 2 - 1px)
+    
+  .delete-button
     padding 0 5px
+    width auto
     top 2px
     right 2px
     cursor pointer
+  
     &:hover
       @extend .bg-info-darkest
       color #fff
@@ -79,5 +130,4 @@ export default App
     color #fff
     font-weight bold
     cursor pointer
-
 </style>

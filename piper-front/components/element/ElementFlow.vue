@@ -18,8 +18,6 @@ div.element-flow(ref='elf')
 </template>
 
 <script lang='coffee'>
-import { SVG } from '@svgdotjs/svg.js'
-
 import ElementControl from './ElementControl.vue'
 import { Element } from '../../lib/index.coffee'
 
@@ -31,44 +29,12 @@ App =
   data: ->
     element_channel: []
     entry_element: null
-    svg: null
   
-  mounted: ->
-    @svg = SVG().addTo(@$refs.elf).size '100%', '100%'
-
   computed:
     element_count: ->
       @element_channel.length
 
   methods:
-    get_bottom: (ele) ->
-      sl = ele.offsetLeft
-      st = ele.offsetTop
-      sh = ele.clientHeight
-      sw = ele.clientWidth
-
-      x = sl + sw / 2
-      y = st + sh
-      [x, y]
-  
-    get_top: (ele) ->
-      sl = ele.offsetLeft
-      st = ele.offsetTop
-      sh = ele.clientHeight
-      sw = ele.clientWidth
-
-      x = sl + sw / 2
-      y = st
-      [x, y]
-
-    line: (source, target) ->
-      [x0, y0] = @get_bottom source
-      [x1, y1] = @get_top target
-      l1 = @svg.line(x0, y0, x0, y0 + (y1 - y0) / 2).stroke {width: 5, color: 'green'}
-      l2 = @svg.line(x0, y0 + (y1 - y0) / 2, x1, y0 + (y1 - y0) / 2).stroke {width: 5, color: 'green'}
-      l3 = @svg.line(x1, y0 + (y1 - y0) / 2, x1, y1).stroke {width: 5, color: 'green'}
-      [l1, l2, l3]
-
     setup_element_flow: ->
       @entry_element = new Element 0, 'Entry Element', 'input', {}
       @element_channel.push [@entry_element]
@@ -77,16 +43,14 @@ App =
       console.log 'Log Flow'
     
     del_ele: (idx, eidx) ->
+      # delete link
+
       @element_channel[idx].splice(eidx, 1)
       if @element_channel[idx].length == 0
         @element_channel.splice(idx, 1)
     
     add_ele: (idx, eidx, element) ->
       ele_ = new Element 0, 'New Element', 'echo', {}
-      line = @line
-      ele_.on_bind = ->
-        [l1, l2, l3] = line element.ele, ele_.ele
-        console.log l1, l2, l3
 
       if !@element_channel[idx + 1]
         @element_channel.push []
@@ -102,18 +66,13 @@ export default App
 
 <style lang='stylus'>
 @import '../../assets/core/color.styl'
+@import './variable.styl'
 
 .element-flow
   display flex
   flex-direction column
   justify-content flex-start
   align-items center
-
-  position relative
-
-  svg
-    position absolute
-    z-index -1
 
   .setup-button
     @extend .bg-info-darkest
@@ -126,13 +85,13 @@ export default App
 
     &:hover
       @extend .bg-info-dark
+
   .element-channel
     display flex
     flex-direction row
     align-items center
     justify-content space-around
-
-    margin-bottom 50px
-
     width 100%
+
+    margin-bottom $channel-space
 </style>
