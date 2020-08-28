@@ -40,13 +40,16 @@ test 'Flow - dispatch Element', ->
   ele1 = 
     idx: 2
     name: 'ele1'
+
   ele2 = 
     idx: 3
     name: 'ele2'
+
   ele3 = 
     idx: 4
     name: 'ele3'
 
+  # build flow
   flow.link entry_ele, ele1
   flow.link ele1, ele2
   flow.link ele1, ele3
@@ -61,13 +64,12 @@ test 'Flow - dispatch Element', ->
   flow.dispatch(ele1)
 
   expect(flow.flow_tree[ele1.idx] == undefined).toBeTruthy()
-  expect(flow.flow_tree[ele2.idx] == undefined).toBeTruthy()
-  expect(flow.flow_tree[ele3.idx] == undefined).toBeTruthy()
-
-
+  expect(flow.flow_tree[ele2.idx].source_elements).not.toContain ele1
+  expect(flow.flow_tree[ele3.idx].source_elements).not.toContain ele1
 
 test 'Flow - link Elements', ->
   [entry_ele, flow] = setup_flow()
+
   new_ele =
     idx: 1
     name: 'new_ele'

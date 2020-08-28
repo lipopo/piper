@@ -13,6 +13,8 @@ class Flow
     @flow_tree[@entry_point.idx] =
       source_elements: []
       target_elements: []
+    
+    @dispatch = @dispatch.bind this
 
   link: (source_element, element) ->
     # 向源元素中填充目标元素
@@ -37,22 +39,29 @@ class Flow
 
   dislink: (source, target) ->
     idx = @flow_tree[source.idx].target_elements.indexOf target
-    console.log @flow_tree, idx
+    target_idx = @flow_tree[target.idx].source_elements.indexOf source
+  
     if idx >= 0
-      # clear element
+      # clear source element
       @flow_tree[source.idx].target_elements.splice idx, 1
+    
+    if target_idx >= 0
+      # clear target idx
+      @flow_tree[target.idx].source_elements.splice target_idx, 1
+  
 
   dispatch: (element) ->
-    dispatch = @dispatch
-    dislink = @dislink
+    self = this
+    # 元素删除
     if @flow_tree[element.idx].target_elements.length > 0
-      # 拆卸子元素
-      @flow_tree[element.idx].target_elements.forEach(console.log)
+      # 清理下游链接
+      target_elements = [...@flow_tree[element.idx].target_elements]
+      target_elements.forEach (ele) -> self.dislink element, ele
     
     if @flow_tree[element.idx].source_elements.length > 0
-      # 清理链接信息
-      @flow_tree[element.idx].source_elements.forEach (ele) -> dislink ele, element
-      @flow_tree[element.idx].source_elements = []
+      # 清理上游链接
+      source_elements = [...@flow_tree[element.idx].source_elements]
+      source_elements.forEach (ele) -> self.dislink ele, element
 
     if @flow_tree[element.idx]
       # 拆卸本元素
