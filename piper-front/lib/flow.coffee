@@ -7,20 +7,19 @@ Flow
 
 
 class Flow
-  constructor: ->
-    # 起点元素
-    @entry_point = null
 
-    # 流的树
+  constructor: (@entry_point) ->
     @flow_tree = {}
+    @flow_tree[@entry_point.idx] =
+      source_elements: []
+      target_elements: []
 
-  add_element: (source_element, element) ->
-
+  link: (source_element, element) ->
     # 向源元素中填充目标元素
-    if @flow_tree[source_element]
-      @flow_tree[source_element].target_elements.push element
+    if @flow_tree[source_element.idx]
+      @flow_tree[source_element.idx].target_elements.push element
     else
-      @flow_tree[source_element] = {
+      @flow_tree[source_element.idx] = {
           # 来源元素
           source_elements: [],
           # 目标元素
@@ -28,37 +27,40 @@ class Flow
       }   
 
     # 向目标元素中添加源元素
-    if @flow_tree[element]
-      @flow_tree[element].source_elements.push source_element
+    if @flow_tree[element.idx]
+      @flow_tree[element.idx].source_elements.push source_element
     else
-      @flow_tree[element] = {
+      @flow_tree[element.idx] = {
           source_elements: [source_element],
           target_elements: []
       }
-  clear_ele: (source, target) ->
-    idx = @flow_tree[source].target_elements.indexOf target
+
+  dislink: (source, target) ->
+    idx = @flow_tree[source.idx].target_elements.indexOf target
+    console.log @flow_tree, idx
     if idx >= 0
       # clear element
-      @flow_tree[source].target_elements.splice idx, 1
+      @flow_tree[source.idx].target_elements.splice idx, 1
 
   dispatch: (element) ->
     dispatch = @dispatch
-    clear = @clear_ele
-    if @flow_tree[element].target_elements.length > 0
+    dislink = @dislink
+    if @flow_tree[element.idx].target_elements.length > 0
       # 拆卸子元素
-      @flow_tree[element].target_elements.forEach (ele) -> dispatch(ele)
+      @flow_tree[element.idx].target_elements.forEach(console.log)
     
-    if @flow_tree[element].source_elements.length > 0
-      # 清理父级别元素target
-      @flow_tree[element].source_elements.forEach (ele) -> clear(ele)
+    if @flow_tree[element.idx].source_elements.length > 0
+      # 清理链接信息
+      @flow_tree[element.idx].source_elements.forEach (ele) -> dislink ele, element
+      @flow_tree[element.idx].source_elements = []
 
-    if @flow_tree[element]
+    if @flow_tree[element.idx]
       # 拆卸本元素
       @dispatch_element element
 
   dispatch_element: (element) ->
     # 在目标元素拆卸单个元素
-    delete @flow_tree[element]
+    delete @flow_tree[element.idx]
 
 
-export default Flow
+export default Flow;
