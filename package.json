@@ -25,7 +25,7 @@
   },
   "homepage": "https://github.com/lipopo/piper#readme",
   "dependencies": {
-    "@jsplumb/community": "^4.0.0-RC19",
+    "@svgdotjs/svg.js": "^3.0.16",
     "vue": "^2.6.12",
     "vue-hot-reload-api": "^2.3.4"
   },

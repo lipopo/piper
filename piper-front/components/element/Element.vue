@@ -1,5 +1,5 @@
 <template lang='pug'>
-div.element
+div.element(ref='ele')
   div.element-header(:class="element_style" @click="change_status") {{ type ? `${name} (${type})` : name}}
   div.sub-items(:style="{display: active ? 'block' : 'none'}")
     div.element-name
@@ -29,7 +29,6 @@ App =
     element_options: element_options
 
   mounted: ->
-    console.log @element
     @name = @element.name
     @type = @element.type
     @meta_info = JSON.stringify @element.meta_info

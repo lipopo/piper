@@ -1,8 +1,11 @@
 <template lang='pug'>
-div.element-control
+div.element-control(ref='elc')
   element-component(:element='element')
   div.delete-button(@click='delete_element') x
-  div.link-button(@click='link_new_element') +
+  div.link-button(
+    v-if='can_link'
+    @click='link_new_element'
+    ) +
 
 </template>
 
@@ -19,6 +22,9 @@ App =
     element:
       type: Object
       required: true
+    
+  mounted: ->
+    @element.bind @$refs.elc
 
   methods:
     delete_element: ->
@@ -26,6 +32,14 @@ App =
     
     link_new_element: ()->
       @$emit 'newele', @element
+    
+    link_element: () ->
+      if @element != window.source_element
+        @$emit 'linkele', @element
+  
+  computed:
+    can_link: ->
+      @element.type == 'split' || @element.target_element.length == 0
 
 export default App
 </script>
