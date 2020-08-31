@@ -7,35 +7,33 @@ Flow
 
 
 class Flow
-
   constructor: (@entry_point) ->
     @flow_tree = {}
     @flow_tree[@entry_point.idx] =
+      element: @entry_point
       source_elements: []
       target_elements: []
-    
-    @dispatch = @dispatch.bind this
 
   link: (source_element, element) ->
     # 向源元素中填充目标元素
     if @flow_tree[source_element.idx]
       @flow_tree[source_element.idx].target_elements.push element
     else
-      @flow_tree[source_element.idx] = {
-          # 来源元素
-          source_elements: [],
-          # 目标元素
-          target_elements: [element]
-      }   
+      @flow_tree[source_element.idx] =
+        element: source_element
+        # 来源元素
+        source_elements: []
+        # 目标元素
+        target_elements: [element]
 
     # 向目标元素中添加源元素
     if @flow_tree[element.idx]
       @flow_tree[element.idx].source_elements.push source_element
     else
-      @flow_tree[element.idx] = {
-          source_elements: [source_element],
-          target_elements: []
-      }
+      @flow_tree[element.idx] =
+        element: element
+        source_elements: [source_element]
+        target_elements: []
 
   dislink: (source, target) ->
     idx = @flow_tree[source.idx].target_elements.indexOf target

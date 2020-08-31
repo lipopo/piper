@@ -1,7 +1,5 @@
 <template lang='pug'>
 div.element-control(ref='elc')
-  div.source-link-row(v-if="element.source_element.length > 0")
-  div.link-row(v-if="element.target_element.length > 0")
   element-component(
     :element='element'
   )
@@ -27,10 +25,10 @@ App =
     element:
       type: Object
       required: true
+    can_link:
+      type: Boolean
+      required: false
     
-  mounted: ->
-    @element.bind @$refs.elc
-
   methods:
     delete_element: ->
       @$emit 'del', @element
@@ -41,10 +39,6 @@ App =
     link_element: () ->
       if @element != window.source_element
         @$emit 'linkele', @element
-  
-  computed:
-    can_link: ->
-      @element.type == 'split' || @element.target_element.length == 0
 
 export default App
 </script>
