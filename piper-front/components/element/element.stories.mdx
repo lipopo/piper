@@ -2,8 +2,10 @@ import { Meta, Preview, Story } from '@storybook/addon-docs/blocks';
 
 import ElementComponent from './Element.vue';
 import ElementControl from './ElementControl.vue';
+import ElementContainer from './ElementContainer.vue';
 import ElementFlow from './ElementFlow.vue';
-import { Element } from '../../lib/index.coffee';
+import Element from './element.coffee';
+import Flow from './flow.coffee';
 
 <Meta title='Component/Element'/>
 
@@ -68,6 +70,34 @@ Element控件
     }}</Story>
 </Preview>
 
+### ElementContainer
+
+Element组件容器， 用于递归的渲染组件树
+
+<Preview>
+    <Story name='element-contianer'>{{
+        components: {
+            ElementContainer
+        },
+        template: `
+            <element-container :element='element' :flow='flow'></element-container>
+        `,
+        mounted: function() {
+            this.element = new Element(
+                0, 'Entry Element', 'input', {}
+            );
+            this.flow = new Flow(this.element);
+            let new_ele = new Element(null, 'Normal Element', 'echo', {});
+            this.flow.link(this.element, new_ele);
+        },
+        data: () => {
+            return {
+                element: {},
+                flow: {}
+            };
+        }
+    }}</Story>
+</Preview>
 
 ### ElementFlow
 

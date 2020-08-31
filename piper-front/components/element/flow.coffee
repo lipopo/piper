@@ -2,19 +2,26 @@
 Flow
 
 抽象的流，用于控制整体的流的概念。主要功能有负责向元素树上
-挂载/拆卸元素节点。
+挂载/拆卸元素节点，构建和管理元素间链接。
 """
-
-
 class Flow
   constructor: (@entry_point) ->
+    # 初始化flow_tree
     @flow_tree = {}
     @flow_tree[@entry_point.idx] =
       element: @entry_point
       source_elements: []
       target_elements: []
 
+  check_idx: (element) ->
+    if element.idx == null
+      # XXX: Math库的通用性
+      element.idx = Math.max(...Object.keys(@flow_tree)) + 1
+  
   link: (source_element, element) ->
+    # 元素间链接构建
+    @check_idx source_element
+    @check_idx element
     # 向源元素中填充目标元素
     if @flow_tree[source_element.idx]
       @flow_tree[source_element.idx].target_elements.push element
@@ -36,6 +43,7 @@ class Flow
         target_elements: []
 
   dislink: (source, target) ->
+    # 元素间链接删除
     idx = @flow_tree[source.idx].target_elements.indexOf target
     target_idx = @flow_tree[target.idx].source_elements.indexOf source
   
@@ -46,7 +54,6 @@ class Flow
     if target_idx >= 0
       # clear target idx
       @flow_tree[target.idx].source_elements.splice target_idx, 1
-  
 
   dispatch: (element) ->
     self = this
@@ -64,10 +71,16 @@ class Flow
     if @flow_tree[element.idx]
       # 拆卸本元素
       @dispatch_element element
+    else
+      false
 
   dispatch_element: (element) ->
     # 在目标元素拆卸单个元素
     delete @flow_tree[element.idx]
+    if Object.keys(@flow_tree).length > 0
+      return false
+    else
+      return true
 
 
 export default Flow;

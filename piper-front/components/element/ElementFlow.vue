@@ -1,12 +1,5 @@
 <template lang='pug'>
 div.element-flow(ref='elf')
-  template(v-if='flow !== null')
-    template(v-for='eleidx in Object.keys(flow.flow_tree)')
-      element-control(
-        :key='`ele-${eleidx}`'
-        :element='flow.flow_tree[eleidx].element'
-        :can_link='flow.flow_tree[eleidx].target_elements.length <= 0'
-      )
   template(v-if='flow === null')
     div
       div.setup-button(@click='setup_element_flow') Setup Element Flow
@@ -16,7 +9,8 @@ div.element-flow(ref='elf')
 
 <script lang='coffee'>
 import ElementControl from './ElementControl.vue'
-import { Element, Flow } from '../../lib/index.coffee'
+import Flow from './flow.coffee'
+import Element from './element.coffee'
 
 App = 
   components: {
@@ -25,7 +19,12 @@ App =
 
   data: ->
     entry_element: null
+    element_array: []
     flow: null
+  
+  computed:
+    element_count: ->
+      @element_array.length
 
   methods:
     setup_element_flow: ->
@@ -34,11 +33,17 @@ App =
     
     load_flow: ->
     
-    del_ele: (idx, eidx) ->
+    del_ele: (element) ->
+      empty_flow = @flow.dispatch element
+      if empty_flow
+        @flow = null
     
-    add_ele: (idx, eidx, element) ->
+    add_ele: (source_element) ->
+      # create new element
+      new_element = new Element null, 'Normal Element', 'echo', {}
+      @flow.link source_element, new_element
 
-    link_ele: (source_element, target_element) ->
+    link_ele: () ->
 
 export default App
 </script>

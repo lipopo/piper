@@ -6,14 +6,13 @@ div.element-control(ref='elc')
     template(v-slot:append)
       div.delete-button(@click='delete_element') x
   div.link-button(
-    v-if='can_link'
     @click='link_new_element'
   ) +
 
 </template>
 
 <script lang='coffee'>
-import { Element } from '../../lib/index.coffee'
+import Element from './element.coffee'
 import ElementComponent from './Element.vue'
 
 App =
@@ -25,9 +24,6 @@ App =
     element:
       type: Object
       required: true
-    can_link:
-      type: Boolean
-      required: false
     
   methods:
     delete_element: ->

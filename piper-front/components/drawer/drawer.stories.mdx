@@ -1,0 +1,25 @@
+import { Meta, Preview, Story } from '@storybook/addon-docs/blocks';
+import Drawer from './Drawer.vue';
+
+
+<Meta title="component/Drawer" />
+
+
+## Drawer
+
+抽屉相关的组件
+
+### BaseDrawer
+
+基础的抽屉组件，用于描述主要的抽屉信息
+
+<Preview>
+    <Story name="base-drawer">{{
+        components: {
+            Drawer
+        },
+        template: `
+        <Drawer></Drawer>
+        `
+    }}</Story>
+</Preview>

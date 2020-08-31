@@ -90,3 +90,20 @@ test 'Flow - link Elements', ->
 
   expect(flow.flow_tree[unknow_ele.idx].target_elements).toContain new_ele
   expect(flow.flow_tree[new_ele.idx].source_elements).toContain unknow_ele
+
+test 'Flow - Check Idx', ->
+  [entry_ele, flow] = setup_flow()
+
+  add1_ele =
+    idx: 1
+    name: 'add_1'
+  
+  add2_ele = 
+    idx: null
+    name: 'add_2'
+
+  flow.link entry_ele, add1_ele
+  flow.link add1_ele, add2_ele
+
+  expect(add2_ele.idx).toBe 2
+  

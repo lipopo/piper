@@ -15,13 +15,14 @@ div.element(ref='ele')
 </template>
 
 <script lang='coffee'>
-import { Element, element_options } from '../../lib/index.coffee';
+import { element_options } from '../../lib/index.coffee'
+import Element from './element.coffee'
 
 App = 
   props:
     element:
       type: Element
-      required: true
+      requird: true
 
   data: ->
     active: false # element的状态
