@@ -47,3 +47,24 @@ import Navigator from './Navigator.vue';
         }
     }}</Story>
 </Preview>
+
+### NavigatorBarWithVersion
+
+导航条可以带有一定的版本信息，通过制定version字段即可
+
+<Preview>
+    <Story name='navigator-with-version'>{{
+        components: {
+            Navigator
+        },
+        template: `
+            <Navigator title='Piper' :version='version'></Navigator>
+        `,
+        props: {
+            version: {
+                type: String,
+                default: 'V1.0'
+            }
+        }
+    }}</Story>
+</Preview>

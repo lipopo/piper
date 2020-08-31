@@ -2,10 +2,10 @@ Function::property = (prop, desc) ->
   Object.defineProperty @prototype, prop, desc
 
 class Navigator
-  constructor: (@title, @links) ->
+  constructor: (@title, @version, @links) ->
 
   @property 'append',
-    get: -> @title
+    get: -> "#{@title}<span class=\"version\">#{@version}</span>"
 
   @property 'after',
     get: ->

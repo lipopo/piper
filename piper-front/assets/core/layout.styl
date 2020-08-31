@@ -1,0 +1,46 @@
+"""
+layout styl 包含了主要的布局相关的参数集合
+
+主要有以下的布局参数
+
+## space 空隙类型
+
+space 空隙，主要用于控制元素之间的间隔，为全局实现统一的空隙风格，
+主要包含有小空隙(同类同属元素间隔)，中等空隙(非同类同属类型间隔)
+
+- g-sm-<size>
+- g-md-<size>
+- g-lg-<size>
+
+## padding 内部空间类型
+
+padding空间，主要用于控制元素内部内容与元素边界border之间的距离，本质
+也是一种空隙，可以考虑采用与空隙一样的度量衡
+
+- p-sm-<size>
+- p-md-<size>
+- p-lp-<size>
+"""
+
+
+$spaces = {
+    sizes: 1 2 3 4 5 6 7 8 9 10
+    name: 'sm' 'md' 'lg'
+    base: 1 5 10
+}
+
+
+for $size in $spaces['sizes']
+    for $name, $nidx in $spaces['name']
+        $base = $spaces['base'][$nidx]
+        .g-{$name}-{$size}
+            margin-right ($base * $size / 10) * 1rem
+
+        .g-{$name}-{$size}-b
+            margin-bottom ($base * $size / 10) * 1rem
+        
+        .g-{$name}-{$size}-l
+            margin-left ($base * $size / 10) * 1rem
+
+        .p-{$name}-{$size}
+            padding ($base * $size / 10) * 1rem

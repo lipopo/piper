@@ -19,12 +19,16 @@ App =
     links: 
       type: Array
       default: -> []
+    
+    version:
+      type:String
+      default: '' # 版本信息 默认为空
 
   data: ->
     navigator: null # 导航逻辑应用
 
   mounted: ->
-    @navigator = new Navigator @title, @links
+    @navigator = new Navigator @title, @version, @links
 
 export default App
 </script>
@@ -47,6 +51,9 @@ export default App
   .navigator-append
     color #fff
     font-size 1.2rem
+    span.version
+      font-size 1rem
+      @extend .g-sm-5-l
 
   .navigator-after
     display flex
