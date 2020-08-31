@@ -31,7 +31,7 @@
   },
   "devDependencies": {
     "@storybook/addon-docs": "^6.0.19",
-    "@storybook/vue": "^6.0.19",
+    "@storybook/vue": "^6.0.20",
     "@vue/component-compiler-utils": "^3.2.0",
     "coffee-loader": "^1.0.0",
     "coffeescript": "^2.5.1",
