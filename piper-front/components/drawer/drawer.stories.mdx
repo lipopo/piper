@@ -19,7 +19,26 @@ import Drawer from './Drawer.vue';
             Drawer
         },
         template: `
-        <Drawer></Drawer>
-        `
+        <div>
+          <Drawer :open='open' :style='{border: "1px solid #ccc"}'>
+              <div>This is A Drawer</div>
+              <div slot='header'><button @click='switch_drawer'>switch</button></div>
+          </Drawer>
+          <Drawer position='left' :open='open' :style='{border: "1px solid #ccc"}'>
+              <div>This is A Drawer</div>
+              <div slot='header'><button @click='switch_drawer'>switch</button></div>
+          </Drawer>
+        </div>
+        `,
+        methods: {
+            switch_drawer: function() {
+                this.open = !this.open;
+            }
+        },
+        data: function() {
+            return {
+                open: true
+            };
+        }
     }}</Story>
 </Preview>
