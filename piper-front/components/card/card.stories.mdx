@@ -1,0 +1,28 @@
+import { Meta, Preview, Story } from '@storybook/addon-docs/blocks';
+
+import Card from './Card.vue';
+
+
+<Meta title='component/Card' />
+
+
+## Card
+
+基础的卡片组件
+
+### BaseCard
+
+只带有阴影变换的卡片
+
+
+<Preview>
+    <Story name='card'>{{
+        components: {
+            Card
+        },
+        template:
+        `
+          <Card :style='{ border: "solid #eee 1px" }'>Base Card</Card>
+        `
+    }}</Story>
+</Preview>
