@@ -19,7 +19,24 @@ padding空间，主要用于控制元素内部内容与元素边界border之间�
 
 - p-sm-<size>
 - p-md-<size>
-- p-lp-<size>
+- p-lg-<size>
+
+## height 空间
+
+height空间，用于描述元素的标高等
+
+- h-sm-<size>
+- h-md-<size>
+- h-lg-<size>
+
+## z空间
+
+用于表示层级信息，主要分成4层结构
+
+- z-hidden-layer 隐藏层 -1
+- z-show-layer 显示层 10
+- z-control-layer 控制层 100
+- z-poper-layer 弹出层 1000
 """
 
 
@@ -44,3 +61,24 @@ for $size in $spaces['sizes']
 
         .p-{$name}-{$size}
             padding ($base * $size / 10) * 1rem
+
+        .p-{$name}-{$size}-t
+            padding-top ($base * $size / 10) * 1rem
+
+        .p-{$name}-{$size}-b
+            padding-bottom ($base * $size / 10) * 1rem
+    
+        .h-{$name}-{$size}
+            height ($base * $size / 10) * 1rem
+
+.z-hidden-layer
+    z-index -1
+
+.z-show-layer
+    z-index 10
+
+.z-control-layer
+    z-index 100
+
+.z-poper-layer
+    z-index 1000

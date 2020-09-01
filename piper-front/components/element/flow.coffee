@@ -60,9 +60,9 @@ class Flow
     self = this
     # 元素删除
     if @flow_tree[element.idx].target_elements.length > 0
-      # 清理下游链接
+      # 清理下游元素
       target_elements = [...@flow_tree[element.idx].target_elements]
-      target_elements.forEach (ele) -> self.dislink element, ele
+      target_elements.forEach (ele) -> self.dispatch ele
     
     if @flow_tree[element.idx].source_elements.length > 0
       # 清理上游链接
@@ -71,9 +71,9 @@ class Flow
 
     if @flow_tree[element.idx]
       # 拆卸本元素
-      @dispatch_element element
+      return @dispatch_element element
     else
-      false
+      return false
 
   dispatch_element: (element) ->
     # 在目标元素拆卸单个元素

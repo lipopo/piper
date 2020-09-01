@@ -80,7 +80,7 @@ Element组件容器， 用于递归的渲染组件树
             ElementContainer
         },
         template: `
-            <element-container :element='element' :flow='flow'></element-container>
+            <element-container :idx='eleidx' :flow='flow'></element-container>
         `,
         mounted: function() {
             this.element = new Element(
@@ -91,8 +91,8 @@ Element组件容器， 用于递归的渲染组件树
         },
         data: () => {
             return {
-                element: {},
-                flow: {}
+                flow: {},
+                eleidx: 0
             };
         }
     }}</Story>

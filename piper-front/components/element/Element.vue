@@ -1,7 +1,7 @@
 <template lang='pug'>
 div.element(ref='ele')
   div.element-header(:class="element_style")
-    div.element-header-content(@click="change_status") {{ type ? `${name} (${type})` : name}}
+    div.element-header-content(@click="change_status") {{ type ? `${idx} : ${name} (${type})` : name}}
     slot(name='append') 
   div.sub-items(:style="{display: active ? 'block' : 'none'}")
     div.element-name
@@ -28,12 +28,14 @@ App =
     active: false # element的状态
     name: null
     type: null
+    idx: null
     meta_info: {}
     element_options: element_options
 
   mounted: ->
     @name = @element.name
     @type = @element.type
+    @idx = @element.idx
     @meta_info = JSON.stringify @element.meta_info
 
   computed:

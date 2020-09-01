@@ -4,8 +4,9 @@ div.element-control(ref='elc')
     :element='element'
   )
     template(v-slot:append)
-      div.delete-button(@click='delete_element') x
-  div.link-button(
+      div.delete-button.z-control-layer(@click='delete_element') x
+  div.link-button.z-control-layer(
+    v-if='canlink'
     @click='link_new_element'
   ) +
 
@@ -17,13 +18,17 @@ import ElementComponent from './Element.vue'
 
 App =
   components: {
-      ElementComponent
+    ElementComponent
   }
 
   props:
     element:
       type: Object
       required: true
+    
+    canlink:
+      type: Boolean
+      default: true
     
   methods:
     delete_element: ->
@@ -41,6 +46,7 @@ export default App
 
 <style lang='stylus'>
 @import '../../assets/core/color.styl'
+@import '../../assets/core/layout.styl'
 @import './variable.styl'
 
 .element-control
