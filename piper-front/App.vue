@@ -1,15 +1,16 @@
 <template lang="pug">
-div.container Piper {{ version }}
-  Button Helo
+Navigator(title='Piper')
 </template>
 
 <script>
 import { version } from './lib/index.coffee';
 import Button from './components/button/Button.vue';
+import Navigator from './components/navigator/Navigator.vue';
 
 export default {
   components: {
-    Button
+    Button,
+    Navigator
   },
   data() {
     return {

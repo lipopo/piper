@@ -1,0 +1,70 @@
+import { Meta, Preview, Story } from '@storybook/addon-docs/blocks';
+import Navigator from './Navigator.vue';
+
+
+<Meta title='component/Navigator' />
+
+# component
+
+基础组件库
+
+## Navigator
+
+导航组件库
+
+### BaseNavigator
+
+基础导航组件
+
+导航组件主要包括了三个部分: 前缀区域、中间区域和后缀区域，在不考虑响应式布局的状态下，不需要考虑当布局发生变更是对与区域信息的变动
+
+前缀区域功能： Brand\Logo\Title等信息
+
+<Preview>
+    <Story name='base-navigator'>{{
+        components: {
+            Navigator
+        },
+        template: `
+            <Navigator
+             title='BaseNavigator'
+             :links='links'>
+            </Navigator>`,
+        props: {
+            links: {
+                type: Array,
+                default: () => [
+                    {
+                        name: 'BaseApp',
+                        link: '#'
+                    },
+                    {
+                        name: 'BaseNav',
+                        link: '#'
+                    },
+                ]
+            }
+        }
+    }}</Story>
+</Preview>
+
+### NavigatorBarWithVersion
+
+导航条可以带有一定的版本信息，通过制定version字段即可
+
+<Preview>
+    <Story name='navigator-with-version'>{{
+        components: {
+            Navigator
+        },
+        template: `
+            <Navigator title='Piper' :version='version'></Navigator>
+        `,
+        props: {
+            version: {
+                type: String,
+                default: 'V1.0'
+            }
+        }
+    }}</Story>
+</Preview>

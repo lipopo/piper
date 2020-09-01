@@ -11,7 +11,7 @@
     "dev": "parcel serve piper-front/index.html",
     "cdd": "start-storybook -p 6006",
     "build": "parcel build piper-front/index.html",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest piper-front/"
   },
   "repository": {
     "type": "git",
@@ -25,11 +25,13 @@
   },
   "homepage": "https://github.com/lipopo/piper#readme",
   "dependencies": {
-    "@jsplumb/community": "^4.0.0-RC19",
+    "@svgdotjs/svg.js": "^3.0.16",
+    "babel-jest": "^26.3.0",
     "vue": "^2.6.12",
     "vue-hot-reload-api": "^2.3.4"
   },
   "devDependencies": {
+    "@babel/plugin-transform-modules-commonjs": "^7.10.4",
     "@storybook/addon-docs": "^6.0.19",
     "@storybook/vue": "^6.0.20",
     "@vue/component-compiler-utils": "^3.2.0",
@@ -37,6 +39,8 @@
     "coffeescript": "^2.5.1",
     "css-loader": "^4.2.2",
     "cssnano": "^4.1.10",
+    "jest": "^26.4.2",
+    "parcel-bundler": "^1.12.4",
     "pug": "^3.0.0",
     "pug-loader": "^2.4.0",
     "pug-plain-loader": "^1.0.0",
@@ -47,5 +51,18 @@
     "vue-loader": "^15.9.3",
     "vue-style-loader": "^4.1.2",
     "vue-template-compiler": "^2.6.12"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "coffee"
+    ],
+    "testMatch": [
+      "**/*.test.coffee?(x)"
+    ],
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest",
+      ".*": "./utils/jest.coffee.processor.js"
+    }
   }
 }

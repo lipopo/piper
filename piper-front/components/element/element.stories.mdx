@@ -1,0 +1,122 @@
+import { Meta, Preview, Story } from '@storybook/addon-docs/blocks';
+
+import ElementComponent from './Element.vue';
+import ElementControl from './ElementControl.vue';
+import ElementContainer from './ElementContainer.vue';
+import ElementFlow from './ElementFlow.vue';
+import Element from './element.coffee';
+import Flow from './flow.coffee';
+
+<Meta title='Component/Element'/>
+
+
+# Component
+
+## Element
+
+通用的element构件
+
+### NormalElement
+
+Element控件
+
+<Preview>
+    <Story name='normal-element'>{{
+        components: {
+            ElementComponent
+        },
+        template: `<element-component :idx='idx' :element='element'></element-component>`,
+        props: {
+            element: {
+                type: Object,
+                default: () => {
+                    return new Element(
+                        0, 'Normal Element', 'input', {}
+                    );
+                }
+            },
+            idx: {
+                type: Number,
+                default: 0
+            }
+        }
+    }}</Story>
+</Preview>
+
+### ElementControl
+
+元素外层控件
+
+<Preview>
+    <Story name='element-control'>{{
+        components: {
+            ElementControl
+        },
+        template: `<element-control :idx='idx' :element='element' @del='del' @newele='new_ele'></element-control>`,
+        props: {
+            element: {
+                type: Object,
+                default: () => {
+                    return new Element(
+                        0, 'Element With Control', 'input', {}
+                    )
+                }
+            }
+        },
+        data: function() {
+            return {
+                idx: 0
+            };
+        },
+        methods: {
+            del: (ele) => {
+                console.log('delete -',ele);
+            },
+            new_ele: (ele) => {
+                console.log('newele -', ele);
+            }
+        }
+    }}</Story>
+</Preview>
+
+### ElementContainer
+
+Element组件容器， 用于递归的渲染组件树
+
+<Preview>
+    <Story name='element-contianer'>{{
+        components: {
+            ElementContainer
+        },
+        template: `
+            <element-container :idx='eleidx' :flow='flow'></element-container>
+        `,
+        mounted: function() {
+            this.element = new Element(
+                0, 'Entry Element', 'input', {}
+            );
+            let flow = new Flow();
+            flow.add(this.element);
+            this.flow = flow;
+        },
+        data: () => {
+            return {
+                flow: {},
+                eleidx: 0
+            };
+        }
+    }}</Story>
+</Preview>
+
+### ElementFlow
+
+element组合的构件
+
+<Preview>
+    <Story name='element-flow'>{{
+        components: {
+            ElementFlow
+        },
+        template: `<element-flow></element-flow>`
+    }}</Story>
+</Preview>

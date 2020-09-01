@@ -1,0 +1,55 @@
+import { Meta, Preview, Story } from '@storybook/addon-docs/blocks';
+
+import BorderBox from './BorderBox.vue';
+import BorderCell from './BorderCell.vue';
+
+
+<Meta title="component/BorderBox" />
+
+## BorderBox
+
+线框组合
+
+### BorderCell
+
+线框单元，主要用于描述各种边界的线框
+
+
+<Preview>
+    <Story name='border-cell'>{{
+        components: {
+            BorderCell
+        },
+        template: `
+            <border-cell :style='{ borderColor: "#ddd", height: "100px" }' :borders='borders' style='dashed'></border-cell>
+        `,
+        props: {
+            borders: {
+                type: Array,
+                default: () => ['top', 'left', 'bottom', 'right']
+            }
+        }
+    }}</Story>
+</Preview>
+
+
+### BorderBox
+
+2*2的线框组合，用于产生连接使用的线段
+
+<Preview>
+    <Story name='border-box'>{{
+        components: {
+            BorderBox
+        },
+        template: `
+            <border-box :style='{ height: "100px", borderColor: "#555" }' :type='type'></border-box>
+        `,
+        props: {
+            type: {
+                type: Array,
+                default: () => [1, 9, 11, 5]
+            }
+        }
+    }}</Story>
+</Preview>
