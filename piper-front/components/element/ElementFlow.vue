@@ -29,21 +29,14 @@ App =
   methods:
     setup_element_flow: ->
       @entry_element = new Element 0, 'Entry Element', 'input', {}
-      @flow = new Flow @entry_element
+      @flow = new Flow
+      flow_tree = 
+        element: @entry_element
+        source_elements: []
+        target_elements: []
+      @$set flow, 'flow_tree', flow_tree
     
     load_flow: ->
-    
-    del_ele: (element) ->
-      empty_flow = @flow.dispatch element
-      if empty_flow
-        @flow = null
-    
-    add_ele: (source_element) ->
-      # create new element
-      new_element = new Element null, 'Normal Element', 'echo', {}
-      @flow.link source_element, new_element
-
-    link_ele: () ->
 
 export default App
 </script>

@@ -5,13 +5,14 @@ Flow
 挂载/拆卸元素节点，构建和管理元素间链接。
 """
 class Flow
-  constructor: (@entry_point) ->
-    # 初始化flow_tree
+  constructor: () ->
     @flow_tree = {}
-    @flow_tree[@entry_point.idx] =
-      element: @entry_point
-      source_elements: []
+  
+  add: (element) ->
+    @flow_tree[element.idx] =
+      element: element
       target_elements: []
+      source_elements: []
 
   check_idx: (element) ->
     if element.idx == null
