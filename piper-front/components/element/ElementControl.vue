@@ -1,6 +1,7 @@
 <template lang='pug'>
 div.element-control(ref='elc')
   element-component(
+    :idx='idx'
     :element='element'
   )
     template(v-slot:append)
@@ -22,6 +23,10 @@ App =
   }
 
   props:
+    idx:
+      type: Number
+      required: true
+
     element:
       type: Object
       required: true

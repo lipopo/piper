@@ -86,8 +86,9 @@ Element组件容器， 用于递归的渲染组件树
             this.element = new Element(
                 0, 'Entry Element', 'input', {}
             );
-            this.flow = new Flow();
-            this.flow.add(this.element);
+            let flow = new Flow();
+            flow.add(this.element);
+            this.flow = flow;
         },
         data: () => {
             return {

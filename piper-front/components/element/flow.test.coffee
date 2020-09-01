@@ -15,11 +15,9 @@ test 'Setup Flow', ->
 
 test 'Flow - Clear Element', ->
   [entry_ele, flow] = setup_flow()
-
   new_ele = 
     idx: 1
     name: 'new_ele'
-
   # add first
   flow.link entry_ele, new_ele
   expect(flow.flow_tree[entry_ele.idx].target_elements).toContain new_ele

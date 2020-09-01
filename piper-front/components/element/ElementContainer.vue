@@ -2,6 +2,7 @@
 div.element-container.b-info-darkest
   template(v-if='idx !== undefined')
     element-control.p-md-5-t.p-sm-1.element-control(
+      :idx='idx'
       :element='element'
       :canlink='can_link'
       @newele='add_sub_element'
@@ -32,7 +33,7 @@ App =
       type: Object
 
     idx:
-      type: String
+      type: Number
       required: true
 
   data: ->
@@ -40,10 +41,12 @@ App =
 
   mounted: ->
     # setup target_elements
+    console.log @idx
     @target_elements = [...(@flow_tree[@idx]?.target_elements || [])]
 
   computed:
     element: ->
+      console.log @idx
       @flow_tree[@idx]?.element || {}
 
     flow_tree: ->
