@@ -25,7 +25,7 @@ Element控件
         components: {
             ElementComponent
         },
-        template: `<element-component :element='element'></element-component>`,
+        template: `<element-component :idx='idx' :element='element'></element-component>`,
         props: {
             element: {
                 type: Object,
@@ -34,6 +34,10 @@ Element控件
                         0, 'Normal Element', 'input', {}
                     );
                 }
+            },
+            idx: {
+                type: Number,
+                default: 0
             }
         }
     }}</Story>
@@ -48,7 +52,7 @@ Element控件
         components: {
             ElementControl
         },
-        template: `<element-control :element='element' @del='del' @newele='new_ele'></element-control>`,
+        template: `<element-control :idx='idx' :element='element' @del='del' @newele='new_ele'></element-control>`,
         props: {
             element: {
                 type: Object,
@@ -58,6 +62,11 @@ Element控件
                     )
                 }
             }
+        },
+        data: function() {
+            return {
+                idx: 0
+            };
         },
         methods: {
             del: (ele) => {

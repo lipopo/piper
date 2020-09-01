@@ -16,7 +16,6 @@ div.element(ref='ele')
 
 <script lang='coffee'>
 import { element_options } from '../../lib/index.coffee'
-import Element from './element.coffee'
 
 App = 
   props:
@@ -25,7 +24,7 @@ App =
       required: true
 
     element:
-      type: Element
+      type: Object
       required: true
 
   data: ->
@@ -35,11 +34,6 @@ App =
     meta_info: {}
     element_options: element_options
 
-  mounted: ->
-    @name = @element.name
-    @type = @element.type
-    @meta_info = JSON.stringify @element.meta_info
-
   computed:
     element_style: ->
       if @active
@@ -47,7 +41,22 @@ App =
       else
         'bg-info-dark'
   
+  mounted: ->
+    @update_element()
+  
+  watch:
+    element: () ->
+      @update_element()
+    
+    idx: () ->
+      @update_element()
+
   methods:
+    update_element: ->
+      @name = @element.name
+      @type = @element.type
+      @meta_info = JSON.stringify @element.meta_info
+
     change_name: (e) ->
       @element.name = @name_ = e.target.value
     

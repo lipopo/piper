@@ -1,19 +1,27 @@
 <template lang='pug'>
 div.element-container.b-info-darkest
   template(v-if='idx !== undefined')
-    element-control.p-md-5-t.p-sm-1.element-control(
+    element-control.p-sm-1.element-control(
       :idx='idx'
       :element='element'
       :canlink='can_link'
+      :layer='layer'
+      :position='position'
+      :bor_num='bor_num'
+      :child_num='target_elements.length'
+      :parent_num='source_elements.length'
       @newele='add_sub_element'
       @del='del_element'
       @linkele='link_element'
     )
     div.element-children
-      template(v-for='ele in target_elements')
+      template(v-for='ele, eleidx in target_elements')
         element-container(
           :flow='flow'
           :idx='ele.idx'
+          :position='eleidx'
+          :layer='layer + 1'
+          :bor_num='target_elements.length'
           @del_element='del_sub_element'
         )
 </template>
@@ -21,10 +29,12 @@ div.element-container.b-info-darkest
 <script lang='coffee'>
 import Element from './element.coffee'
 import ElementControl from './ElementControl.vue'
+import BorderBox from '../border-box/BorderBox.vue'
 
 App =
   name: 'ElementContainer'
   components: {
+    BorderBox,
     ElementControl
   }
 
@@ -35,18 +45,30 @@ App =
     idx:
       type: Number
       required: true
-
+  
+    layer:
+      type: Number
+      default: 0
+    
+    position:
+      type: Number
+      default: 0
+    
+    bor_num:
+      type: Number
+      default: 0
+  
   data: ->
     target_elements: [] # 目标元素列表
+    source_elements: [] # 源头元素表
 
   mounted: ->
     # setup target_elements
-    console.log @idx
     @target_elements = [...(@flow_tree[@idx]?.target_elements || [])]
+    @source_elemnts = [...(@flow_tree[@idx]?.source_elements || [])]
 
   computed:
     element: ->
-      console.log @idx
       @flow_tree[@idx]?.element || {}
 
     flow_tree: ->
@@ -75,7 +97,6 @@ App =
       target_idx = @target_elements.indexOf element
       @flow.dispatch element
       @target_elements.splice target_idx, 1
-      console.log @target_elements
 
     link_element: (element) ->
       @flow.link @element, element
@@ -97,7 +118,7 @@ export default App
 
 .element-control
   // @extend .g-md-5-b
-  width 15rem
+  width 25rem
 
 .element-children
   display flex

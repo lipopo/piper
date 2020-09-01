@@ -1,11 +1,15 @@
 <template lang='pug'>
-div.element-control(ref='elc')
+div.element-control
+  border-box.h-md-2(:type='top_border')
+
   element-component(
     :idx='idx'
     :element='element'
   )
     template(v-slot:append)
       div.delete-button.z-control-layer(@click='delete_element') x
+
+  border-box.h-md-2(:type='bottom_border')
   div.link-button.z-control-layer(
     v-if='canlink'
     @click='link_new_element'
@@ -16,10 +20,12 @@ div.element-control(ref='elc')
 <script lang='coffee'>
 import Element from './element.coffee'
 import ElementComponent from './Element.vue'
+import BorderBox from '../border-box/BorderBox.vue'
 
 App =
   components: {
-    ElementComponent
+    ElementComponent,
+    BorderBox
   }
 
   props:
@@ -35,6 +41,38 @@ App =
       type: Boolean
       default: true
     
+    position:
+      type: Number
+    
+    layer:
+      type: Number
+
+    bor_num:
+      type: Number
+
+    child_num:
+      type: Number
+  
+  computed:
+    bottom_border: ->
+      tp = []
+      if @child_num > 0
+        tp = [9, 11]
+      return tp
+    
+    top_border: ->
+      tp = []
+      if @layer > 0
+        tp = [...tp, 9, 11]
+        if @bor_num > 1
+          if @position == 0
+            tp = [...tp, 5]
+          else if @position == @bor_num - 1
+            tp = [...tp, 6]
+          else
+            tp = [...tp, 5, 6]
+      return tp
+  
   methods:
     delete_element: ->
       @$emit 'del', @element
@@ -131,4 +169,5 @@ export default App
     color #fff
     font-weight bold
     cursor pointer
+
 </style>

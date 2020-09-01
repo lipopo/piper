@@ -1,61 +1,93 @@
 <template lang='pug'>
-div.border-box(:class='padcls')
-  div(:class='borderclass')
+div.border-box
+  div.border-row
+    border-cell.cell(:borders='tl_cell')
+    border-cell.cell(:borders='tr_cell')
+  div.border-row
+    border-cell.cell(:borders='bl_cell')
+    border-cell.cell(:borders='br_cell')
 </template>
+
 <script lang='coffee'>
+import BorderCell from './BorderCell.vue'
+
 App = 
+  components: {
+    BorderCell
+  }
+
   props:
     type:
       type: Array
       default: () => []
 
   computed:
-    borderclass: ->
-      cname_list = []
-      for bname in @type
-        cname_list.push "border-#{@type}"
-      return "border-#{@type}"
-    
-    padcls: ->
-      return "pad-#{@type}"
+    bl_cell: ->
+      @type.map(
+        (tp) ->
+          re = switch tp
+            when 1 then 'bottom'
+            when 8 then 'left'
+            when 9 then 'right'
+            when 12 then 'top'
+            else false
+          return re
+      ).filter(
+        (val) -> val
+      )
+
+    br_cell: ->
+      @type.map(
+        (tp) ->
+          switch tp
+            when 2 then 'bottom'
+            when 3 then 'right'
+            when 10 then 'top'
+            else false
+      ).filter(
+        (val) -> val
+      )
+
+    tr_cell: ->
+      @type.map(
+        (tp) ->
+          switch tp
+            when 4 then 'right'
+            when 5 then 'top'
+            else false
+      ).filter(
+        (val) -> val
+      )
+
+    tl_cell: ->
+      @type.map(
+        (tp) ->
+          switch tp
+            when 7 then 'left'
+            when 11 then 'right'
+            when 6 then 'top'
+            else false
+      ).filter(
+        (val) -> val
+      )
 
 export default App
 </script>
 
 <style lang='stylus'>
-
-
-.pad-top-right
-  padding-left 50%
-
 .border-box
-  width 100%
-  border-color inherit
+  display flex
+  flex-direction column
+  align-items stretch
+  justify-content flex-start
+  .border-row
+    display flex
+    height 50%
+    flex-direction row
+    align-items stretch
+    justify-content flex-start
 
-  .border-base
-    height 100%
-
-  .border-none
-    border none
-  
-  .border-bottom
-    border-bottom-width 1px
-    border-bottom-style solid
-  
-  .border-top
-    border-top-width 1px
-    border-top-style solid
-  
-  .border-left
-    border-left-width 1px
-    border-left-style solid
-  
-  .border-right
-    border-right-width 1px
-    border-right-style solid
-  
-  .border-top-right
-    border-top-width 1px
-    border-top-style solid 
-    padding-left 50%
+    .cell
+      height 100%
+      width 50%
 </style>
