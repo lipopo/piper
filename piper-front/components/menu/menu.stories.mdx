@@ -1,0 +1,110 @@
+import { Meta, Preview, Story } from '@storybook/addon-docs/blocks';
+
+import MenuItem from './MenuItem.vue';
+import Menu from './Menu.vue';
+
+
+<Meta title='component/Menu' />
+
+## Menu
+
+常用菜单选项
+
+### MenuItem
+
+单个菜单选项，主要包含了两种状态(激活/hover/非激活)，而激活和非激活主要是由于多个样式状态决定的，一个是背景颜色，
+即menu-item的背景颜色的加深或者变浅，另外一个是字体的粗细，一般激活状态的字体采用的是粗体字，而非激活状态的
+字体采用的是非加粗的字体。
+
+<Preview>
+    <Story
+        name='menu-item'
+        args={{
+            active: false,
+            bgColor: '#eee',
+            bgActiveColor: '#eee',
+            bgHoverColor: '#fff',
+            fontColor: '#555'
+        }}
+        argTypes={{
+            bgColor: { control: { type: 'color' } },
+            bgActiveColor: { control: { type: 'color' } },
+            bgHoverColor: { control: { type: 'color' } },
+            fontColor: { control: { type: 'color' } }
+        }}
+    >{
+        ((args, { argTypes }) => ({
+            props: ['active', 'bgColor', 'bgActiveColor', 'bgHoverColor', 'fontColor'],
+            components: { MenuItem },
+            template: `<menu-item
+              :active='active'
+              :bgColor='bgColor'
+              :bgHoverColor='bgHoverColor'
+              :bgActiveColor='bgActiveColor'
+              :fontColor='fontColor'
+            >
+              <span>Hello</span>
+            </menu-item>`
+        })).bind({})
+    }</Story>
+</Preview>
+
+### Menu
+
+菜单集合选项
+
+<Preview>
+    <Story
+        name='menu'
+        args={{
+            menuBgColor: '#eee',
+            itemActiveColor: '#ddd',
+            itemHoverColor: '#ddd',
+            fontColor: '#555',
+            items: [
+                {
+                    name: 'Prefix'
+                },
+                {
+                    name: 'Next'
+                },
+            ]
+        }}
+        argTypes={{
+            menuBgColor: {
+                control: {
+                    type: 'color'
+                }
+            },
+            itemActiveColor: {
+                control: {
+                    type: 'color'
+                }
+            },
+            itemHoverColor: {
+                control: {
+                    type: 'color'
+                }
+            },
+            fontColor: {
+                control: {
+                    type: 'color'
+                }
+            }
+        }}
+    >{
+        ((args, { argTypes }) => ({
+            props: ['menuBgColor', 'itemActiveColor', 'itemHoverColor', 'items', 'fontColor'],
+            components: { Menu },
+            template: `<Menu
+              :menuBgColor='menuBgColor'
+              :itemActiveColor='itemActiveColor'
+              :itemHoverColor='itemHoverColor'
+              :fontColor='fontColor'
+              :items='items'
+            >
+            </Menu>
+            `
+        })).bind({})
+    }</Story>
+</Preview>

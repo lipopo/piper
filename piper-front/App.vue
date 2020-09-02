@@ -3,9 +3,17 @@ div.layout
   div.nav
     Navigator(title='Piper' :version='version')
   div.content
-    Drawer.drawer.p-sm-5(:open='drawer_open')
-      div(slot='header')
+    Drawer.drawer(:open='drawer_open')
+      div.p-sm-5(slot='header')
         span(@click='open_drawer') O
+      Menu(
+        :fontColor='"#fff"'
+        :menuBgColor='Color.vio.darkest'
+        :itemActiveColor='Color.vio.default'
+        :itemHoverColor='Color.vio.dark'
+        :items='menu_item'
+        @active
+      )
     div.com-content.p-sm-5
       component(:is='content')
 
@@ -13,7 +21,9 @@ div.layout
 
 <script>
 import { version } from './lib/index.coffee';
+import Color from './assets/core/color.js';
 import Drawer from './components/drawer/Drawer.vue';
+import Menu from './components/menu/Menu.vue';
 import Navigator from './components/navigator/Navigator.vue';
 // import ElementFlow from './components/element/ElementFlow.vue';
 
@@ -21,13 +31,19 @@ export default {
   components: {
     Navigator,
     Drawer,
+    Menu
     // ElementFlow
   },
   data() {
     return {
       version: version,
       drawer_open: false,
-      content: null
+      content: null,
+      menu_item: [
+        {name: 'Flow'},
+        {name: 'Config'}
+      ],
+      Color: Color
     }
   },
   methods: {

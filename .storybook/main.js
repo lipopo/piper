@@ -3,7 +3,8 @@ module.exports = {
         '../piper-front/**/*.stories.mdx'
     ],
     addons: [
-        '@storybook/addon-docs'
+        '@storybook/addon-docs',
+        '@storybook/addon-controls'
     ],
     webpackFinal: async (config, { configType }) => {
 
