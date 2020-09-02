@@ -32,11 +32,11 @@ export default App
 
 <style lang='stylus'>
 .fixed-left
-  position fixed
+  position absolute 
   left 0
 
 .fixed-right
-  position fixed
+  position absolute
   right 0
 
 .drawer-open
