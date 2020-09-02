@@ -5,6 +5,8 @@ div.navigator
     div.navigator-content {{ navigator.content }}
     div.navigator-after
       ul(v-html='navigator.after')
+      div
+        slot
 </template>
 
 <script lang='coffee'>
