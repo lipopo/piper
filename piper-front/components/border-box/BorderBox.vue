@@ -80,14 +80,18 @@ export default App
   flex-direction column
   align-items stretch
   justify-content flex-start
+  border-color inherit
+
   .border-row
     display flex
     height 50%
     flex-direction row
     align-items stretch
     justify-content flex-start
+    border-color inherit
 
     .cell
       height 100%
       width 50%
+      border-color inherit
 </style>

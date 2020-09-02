@@ -38,18 +38,89 @@ import BorderCell from './BorderCell.vue';
 2*2的线框组合，用于产生连接使用的线段
 
 <Preview>
-    <Story name='border-box'>{{
+    <Story name='border-box'
+        args={
+            {
+                leftBottom: true,
+                leftMedium: true,
+                leftTop: true,
+                topLeft: true,
+                bottomLeft: true,
+                topCenter: true,
+                bottomCenter: true,
+                rightBottom: true,
+                rightMedium: true,
+                rightTop: true,
+                topRight: true,
+                bottomRight: true,
+                borderColor: '#ccc'
+            }
+        }
+        argTypes={{
+            borderColor: {control: 'color'}
+        }}
+    >{(
+        (args, { argTypes }) => ({
         components: {
             BorderBox
         },
         template: `
-            <border-box :style='{ height: "100px", borderColor: "#555" }' :type='type'></border-box>
+            <div>
+                <border-box :style='{ height: "100px", borderColor: borderColor }' :type='type'></border-box>
+                <span>border-box:type: {{ type }} <button @click="copy_type">Copy Type</button></span>
+            </div>
         `,
-        props: {
-            type: {
-                type: Array,
-                default: () => [1, 9, 11, 5]
+        methods: {
+            copy_type: async function() {
+                await navigator.clipboard.writeText(JSON.stringify(this.type))
+                alert("复制成功");
             }
-        }
-    }}</Story>
+        },
+        computed: {
+            type: function() {
+                let _type = [];
+                if(this.leftBottom)
+                    _type.push(1);
+                if(this.rightBottom)
+                    _type.push(2);
+                if(this.bottomRight)
+                    _type.push(3);
+                if(this.topRight)
+                    _type.push(4);
+                if(this.rightTop)
+                    _type.push(5);
+                if(this.leftTop)
+                    _type.push(6);
+                if(this.topLeft)
+                    _type.push(7);
+                if(this.bottomLeft)
+                    _type.push(8);
+                if(this.bottomCenter)
+                    _type.push(9);
+                if(this.rightMedium)
+                    _type.push(10);
+                if(this.topCenter)
+                    _type.push(11);
+                if(this.leftMedium)
+                    _type.push(12);
+                
+                return _type;
+            }
+        },
+        props: [
+            'leftBottom',
+            'leftMedium',
+            'leftTop',
+            'rightBottom',
+            'rightMedium',
+            'rightTop',
+            'topLeft',
+            'bottomLeft',
+            'topCenter',
+            'bottomCenter',
+            'topRight',
+            'bottomRight',
+            'borderColor'
+        ]
+    })).bind({})}</Story>
 </Preview>
