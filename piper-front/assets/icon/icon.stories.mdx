@@ -1,0 +1,37 @@
+import { Meta, Preview, Story } from '@storybook/addon-docs/blocks';
+
+import Icon from './Icon.vue';
+
+
+<Meta title="asset/Icon" />
+
+## Icon
+
+常用的icon组件库
+
+### BaseIcon
+
+显示icon所使用的组件
+
+<Preview>
+    <Story name='icon' args={{
+        iconName: 'music',
+        spin: false,
+        iconColor: '#ccc'
+    }}
+        argTypes={{
+            iconColor: { control: 'color' }
+        }}
+    >{
+        ((args, { argTypes }) => ({
+            props: ['iconName', 'spin', 'iconColor'],
+            components: {
+                Icon
+            },
+            template: `<Icon
+                :iconName='iconName'
+                :spin='spin'
+                :fontColor='iconColor'></Icon>`
+        })).bind({})
+    }</Story>
+</Preview>
