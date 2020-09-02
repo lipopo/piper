@@ -12,11 +12,9 @@ div.layout
         :itemActiveColor='Color.vio.default'
         :itemHoverColor='Color.vio.dark'
         :items='menu_item'
-        @active
       )
     div.com-content.p-sm-5
       component(:is='content')
-
 </template>
 
 <script>
@@ -40,8 +38,8 @@ export default {
       drawer_open: false,
       content: null,
       base_menu_item: [
-        {name: 'Flow', icon:'flow'},
-        {name: 'Config', icon: 'flow'}
+        {name: 'Flow', icon:'flow-icon'},
+        {name: 'Config', icon: 'config-icon'}
       ],
       Color: Color
     }
@@ -56,7 +54,11 @@ export default {
       if(this.drawer_open) {
         return this.base_menu_item;
       }else {
-        return this.base_menu_item;
+        return this.base_menu_item.map( (item) => {
+          return {
+            name: `<span class='${item.icon}'>${item.name[0]}</span>`
+          };
+        });
       }
     }
   }
@@ -74,7 +76,6 @@ export default {
   .content
     position relative
     flex-grow 1
-    min-height 10rem
     .drawer
       @extend .bg-vio-darkest
       color #fff

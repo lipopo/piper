@@ -12,7 +12,6 @@ div.drawer(:class='drawer_base')
 </template>
 
 <script lang='coffee'>
-
 App = 
   props:
     position:
@@ -34,10 +33,12 @@ export default App
 .fixed-left
   position absolute 
   left 0
+  justify-content flex-end
 
 .fixed-right
   position absolute
   right 0
+  justify-content flex-start
 
 .drawer-open
   width 10rem
@@ -46,11 +47,9 @@ export default App
   width 2rem
 
 .drawer
-
   display flex
   flex-direction column
   align-items center
-  justify-content flex-start
 
   .drawer-header
     width 100%

@@ -12,7 +12,7 @@ div.menu-list
         :bgHoverColor='itemHoverColor'
         :fontColor='fontColor'
       )
-        span {{ item.name }}
+        div(v-html='item.name')
       
 </template>
 <script lang='coffee'>
