@@ -27,6 +27,7 @@
   "dependencies": {
     "@svgdotjs/svg.js": "^3.0.16",
     "babel-jest": "^26.3.0",
+    "font-awesome": "^4.7.0",
     "vue": "^2.6.12",
     "vue-hot-reload-api": "^2.3.4"
   },
