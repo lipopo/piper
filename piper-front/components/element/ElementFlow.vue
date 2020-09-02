@@ -1,14 +1,14 @@
 <template lang='pug'>
 div.element-flow(ref='elf')
-  template(v-if='flow !== null')
-    element-container(
-      :flow='flow'
-      :idx='0'
-      @del_element='delflow'
-    )
+  //- template(v-if='flow !== null')
+  //-   element-container(
+  //-     :flow='flow'
+  //-     :idx='0'
+  //-     @del_element='delflow'
+  //-   )
 
-    div.export-button.g-lg-5-t
-      div.setup-button(@click='export_flow') Export As .flow File
+  //-   div.export-button.g-lg-5-t
+  //-     div.setup-button(@click='export_flow') Export As .flow File
   template(v-if='flow === null')
     div
       div.setup-button(@click='setup_element_flow') Setup Element Flow

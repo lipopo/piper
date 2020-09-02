@@ -40,7 +40,7 @@ export default App
   right 0
 
 .drawer-open
-  width 25rem
+  width 10rem
 
 .drawer-close
   width 2rem
