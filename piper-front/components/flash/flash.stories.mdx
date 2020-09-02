@@ -1,0 +1,51 @@
+import { Meta, Preview, Story } from '@storybook/addon-docs/blocks';
+
+import Flash from './Flash.vue';
+
+<Meta title='component/Flash'/>
+
+## Flash
+
+闪念空间，用于渲染一个闪念。
+
+### BaseFlash
+
+基础闪念，主要是渲染在页面或者组件的头部，用于显示部分信息。
+
+<Preview>
+    <Story name='base-flash'
+        args={{
+            iconName: 'music',
+            content: 'The info in use Type'
+        }}
+    >{(
+        ((args, {argTypes}) => ({
+            components: { Flash },
+            template: `
+              <div>
+                <Flash
+                  v-for='type in types'
+                  class='g-sm-5-b'
+                  :iconName='iconName'
+                  :type='type'
+                  :content='content + "-(" + type + ")"'></Flash>
+              </div>
+            `,
+            data: function() {
+                return {
+                    types: [
+                        'success',
+                        'error',
+                        'warning',
+                        'info',
+                        'primary',
+                        'vio',
+                        'pink'
+                    ]
+                }
+            },
+            props: [
+                'iconName', 'content'
+            ]
+        })).bind({}))}</Story>
+</Preview>
