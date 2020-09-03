@@ -7,16 +7,22 @@ div.config-page
       div
         Icon(v-if='loading' iconName='refresh' fontColor='#555' :spin='loading')
     div.split
+    template(v-if='!loading')
+      div.section.p-sm-5
+        .section-header Common Setting
+        .section-content UserName {{ user_name }}
+      .split
     div.p-sm-5.control
       div.bg-success-default(@click='save_config' :class='btn') 
-        span.g-sm-5 Save
-        Icon(v-if='saving' iconName='refresh' fontColor='#fff' :spin='saving')
+        span Save
+        Icon.g-sm-5-l(v-if='saving' iconName='refresh' fontColor='#fff' :spin='saving')
 </template>
 
 <script lang='coffee'>
 import Icon from '../assets/icon/Icon.vue'
 
 import Card from '../components/card/Card.vue'
+import Config from './config.coffee'
 
 App =
   name: 'ConfigPage'
@@ -30,10 +36,22 @@ App =
     loading: true
     saving: false 
     user_name: ''
+    config: new Config()
+  
+  mounted: ->
+    data = await @config.load()
+    @user_name = data?.user_name
+    @loading = false
 
   methods:
     save_config: ->
+      if @saving
+        return
       @saving = true
+      # 异步存储 await save
+      await @config.save({})
+      @saving = false
+
     
   computed:
     btn: ->
@@ -92,4 +110,19 @@ export default App
 
       &:hover
         @extend .bg-success-light
+    
+    .section
+      display flex
+      flex-direction column
+
+      .section-header
+        @extend .p-sm-5
+        @extend .b-gray-light
+        @extend .inline-block
+        border-bottom-width 1px
+        border-bottom-style solid
+      
+      .section-content
+        @extend .p-sm-5
+        
 </style>
