@@ -98,7 +98,6 @@ export default App
 
       &:hover
         filter opacity(70%)
-    
 
     .button
       @extend .inline-block
@@ -124,5 +123,4 @@ export default App
       
       .section-content
         @extend .p-sm-5
-        
 </style>
