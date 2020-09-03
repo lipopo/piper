@@ -1,6 +1,7 @@
 <template lang='pug'>
 div.element-container.b-info-darkest
   template(v-if='idx !== undefined')
+    border-box.h-md-2(:type='top_border')
     element-control.p-sm-1.element-control(
       :idx='idx'
       :element='element'
@@ -14,6 +15,7 @@ div.element-container.b-info-darkest
       @del='del_element'
       @linkele='link_element'
     )
+    border-box.h-md-2(:type='bottom_border')
     div.element-children
       template(v-for='ele, eleidx in target_elements')
         element-container(
@@ -24,6 +26,21 @@ div.element-container.b-info-darkest
           :bor_num='target_elements.length'
           @del_element='del_sub_element'
         )
+      
+    element-container(
+      v-if='layer == 0'
+      :flow='flow'
+      :idx='1'
+      :position='0'
+      :layer='layer + 1'
+      :bor_num='1'
+      @del_element='del_sub_element'
+    )
+
+    .g-md-5-t.flow-control(v-if='layer == 0')
+      .button.add-button New Element
+      .button.save-button Save Flow
+      .button.export-button Export Flow
 </template>
 
 <script lang='coffee'>
@@ -83,6 +100,29 @@ App =
       else 
         return false
 
+    bottom_border: ->
+      tp = []
+      if @target_elements.length > 0
+        tp = [9, 11]
+      
+      if @target_elements.length == 1
+        if @target_elements[0].type == 'concate'
+          tp = [...tp, 1,2]
+      return tp
+    
+    top_border: ->
+      tp = []
+      if @layer > 0
+        tp = [...tp, 9, 11]
+        if @bor_num > 1
+          if @position == 0
+            tp = [...tp, 5]
+          else if @position == @bor_num - 1
+            tp = [...tp, 6]
+          else
+            tp = [...tp, 5, 6]
+      return tp
+
   methods:
     add_sub_element: (element) ->
       new_ele = new Element null, 'Normal Element', 'echo', {}
@@ -125,5 +165,20 @@ export default App
   flex-direction row
   align-items flex-start
   justify-content flex-start
+
+.flow-control
+  display flex
+  align-items center
+
+  .button
+    @extend .bg-info-darkest
+    @extend .p-sm-5
+    @extend .g-sm-5
+
+    cursor pointer
+    color #fff
+
+    &:hover
+      @extend .bg-info-dark
 
 </style>
