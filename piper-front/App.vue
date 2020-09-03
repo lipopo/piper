@@ -50,7 +50,6 @@ import Navigator from './components/navigator/Navigator.vue';
 import { 
   FlowBuilderPage,
   ConfigPage } from './page';
-// import ElementFlow from './components/element/ElementFlow.vue';
 
 export default {
   components: {
@@ -61,7 +60,6 @@ export default {
     FlowBuilderPage,
     ConfigPage,
     Flash
-    // ElementFlow
   },
   data() {
     return {
@@ -80,7 +78,9 @@ export default {
   },
   mounted: function() {
     let flash = new FlashE();
+    // 绑定闪念事件
     flash.onflash(this.push_flash);
+    // 绑定加载事件
     this.app.onloading(this.set_loading);
     this.app.onloaded(this.set_loaded);
   },
