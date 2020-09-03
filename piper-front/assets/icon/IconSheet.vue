@@ -30,9 +30,9 @@ App =
   methods:
     copy_icon: (icon_name) ->
       await navigator.clipboard.writeText(
-        "Icon(:iconColor='#{icon_name}' :fontColor='#{@iconColor}')"
+        "Icon(iconName='#{icon_name}' fontColor='#{@iconColor}' :spin='false')"
       )
-      alert 'Type Copied!'
+      alert 'Icon Copied!'
 
 export default App
 </script>
