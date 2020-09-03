@@ -1,6 +1,7 @@
 import { Meta, Preview, Story } from '@storybook/addon-docs/blocks';
 
 import Icon from './Icon.vue';
+import IconSheet from './IconSheet.vue';
 
 
 <Meta title="asset/Icon" />
@@ -34,4 +35,26 @@ import Icon from './Icon.vue';
                 :fontColor='iconColor'></Icon>`
         })).bind({})
     }</Story>
+</Preview>
+
+### IconSheet
+
+渲染常用的icon字符
+
+
+<Preview>
+    <Story name='icon-sheet'
+        args={{
+            iconColor: '#555'
+        }}
+        argTypes={{
+            iconColor: {
+                control: 'color'
+            }
+        }}
+    >{((args, { argTypes }) => ({
+        props: ['iconColor'],
+        components: { IconSheet },
+        template: `<icon-sheet :iconColor='iconColor'></icon-sheet>`
+    })).bind({})}</Story>
 </Preview>
