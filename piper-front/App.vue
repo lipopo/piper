@@ -48,6 +48,7 @@ import Menu from './components/menu/Menu.vue';
 import Navigator from './components/navigator/Navigator.vue';
 
 import { 
+  FlowPage,
   FlowBuilderPage,
   ConfigPage } from './page';
 
@@ -58,6 +59,7 @@ export default {
     Menu,
     Icon,
     FlowBuilderPage,
+    FlowPage,
     ConfigPage,
     Flash
   },
@@ -65,9 +67,9 @@ export default {
     return {
       version: version,
       drawer_open: false,
-      content: 'flow-builder-page',
+      content: 'flow-page',
       base_menu_item: [
-        {name: 'Flow', icon:'random', icls: 'r-Z-90', page: 'flow-builder-page'},
+        {name: 'Flow', icon:'random', icls: 'r-Z-90', page: 'flow-page'},
         {name: 'Config', icon: 'cog', page: 'config-page'}
       ],
       Color: Color,
