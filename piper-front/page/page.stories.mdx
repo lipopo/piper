@@ -1,0 +1,40 @@
+import { Meta, Preview, Story } from '@storybook/addon-docs/blocks';
+
+import FlowBuilderPage from './FlowBuilder.vue';
+import ConfigPage from './Config.vue';
+
+<Meta title='Page'/>
+
+# Page
+
+主要页面组合
+
+
+## FlowBuilder Page
+
+流程构建页面，主要包含了一个流程构建器
+
+<Preview>
+    <Story name='flow-builder'>{{
+        components: {
+            FlowBuilderPage
+        },
+        template: `
+            <flow-builder-page></flow-builder-page>
+        `
+    }}</Story>
+</Preview>
+
+
+## Config Page
+
+配置页面，主要对于用户偏好等进行配置。
+
+<Preview>
+    <Story name='config'>{{
+        components: {
+            ConfigPage
+        },
+        template: `<config-page></config-page>`
+    }}</Story>
+</Preview>
