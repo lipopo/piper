@@ -1,0 +1,28 @@
+import { Meta, Preview, Story } from '@storybook/addon-docs/blocks';
+
+import SearchBar from './SearchBar.vue';
+
+
+<Meta title='component/SearchBar' />
+
+
+## SearchBar
+
+常见的搜索框
+
+
+### BaseSearcBar
+
+基础的搜索框
+
+
+<Preview>
+    <Story
+      name='base-search-bar'
+    >{((args, {argTypes}) => ({
+        components: {
+          SearchBar
+        },
+        template: `<search-bar></search-bar>`
+      })).bind({})}</Story>
+</Preview>
