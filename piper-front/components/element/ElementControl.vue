@@ -1,13 +1,13 @@
 <template lang='pug'>
 div.element-control
-  border-box.h-md-2(:type='top_border')
+  // border-box.h-md-2(:type='top_border')
   element-component(
     :idx='idx'
     :element='element'
   )
     template(v-slot:append)
       div.delete-button.z-control-layer(@click='delete_element') x
-  border-box.h-md-2(:type='bottom_border')
+  // border-box.h-md-2(:type='bottom_border')
   div.link-button.z-control-layer(
     v-if='canlink'
     @click='link_new_element'

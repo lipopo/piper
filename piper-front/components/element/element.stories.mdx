@@ -89,7 +89,9 @@ Element组件容器， 用于递归的渲染组件树
             ElementContainer
         },
         template: `
+            <div :style="{display: 'inline-block'}">
             <element-container :idx='eleidx' :flow='flow'></element-container>
+            </div>
         `,
         mounted: function() {
             this.element = new Element(

@@ -81,6 +81,7 @@ export default App
   align-items stretch
   justify-content flex-start
   border-color inherit
+  width 100%
 
   .border-row
     display flex

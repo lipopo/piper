@@ -24,7 +24,7 @@
       Card.item-card(v-for='my_item in my_flow_items')
         div(v-html='my_item.content')
 
-      Card.item-card
+      Card.item-card.crete-card
         div(@click='open_item')
           Icon(iconName='plus' fontColor='#555')
 
@@ -111,9 +111,8 @@ export default App
         border-width 1px
         border-style solid
 
-        width 20vw
-        height 20vw
-        font-size 4rem
+        width 15rem
+        height 15rem
         
         cursor pointer
 
@@ -124,6 +123,9 @@ export default App
         &:hover
           @extend .b-gray-default
           border-style dashed
+      
+      .create-card
+        font-size 4rem
 
   .trending-section
     display flex

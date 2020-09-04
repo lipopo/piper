@@ -1,7 +1,7 @@
 <template lang='pug'>
 div.element(ref='ele')
   div.element-header(:class="element_style")
-    div.element-header-content(@click="change_status") {{ type ? `${idx} : ${name} (${type})` : name}}
+    div.element-header-content(@click="change_status") {{ type ? `${name} (${type})` : name}}
     slot(name='append') 
   div.sub-items(:style="{display: active ? 'block' : 'none'}")
     div.element-name
