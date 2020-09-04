@@ -83,5 +83,7 @@ class Flow
     else
       return true
 
+  export: ->
+    # 导出flow
 
 export default Flow;

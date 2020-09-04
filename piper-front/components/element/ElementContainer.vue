@@ -15,7 +15,9 @@ div.element-container.b-info-darkest
       @del='del_element'
       @linkele='link_element'
     )
+
     border-box.h-md-2(:type='bottom_border')
+
     div.element-children
       template(v-for='ele, eleidx in target_elements')
         element-container(
@@ -26,25 +28,18 @@ div.element-container.b-info-darkest
           :bor_num='target_elements.length'
           @del_element='del_sub_element'
         )
-      
-    element-container(
-      v-if='layer == 0'
-      :flow='flow'
-      :idx='1'
-      :position='0'
-      :layer='layer + 1'
-      :bor_num='1'
-      @del_element='del_sub_element'
-    )
 
     .g-md-5-t.flow-control(v-if='layer == 0')
-      .button.add-button New Element
-      .button.save-button Save Flow
-      .button.export-button Export Flow
+      .button.save-button(@click='save_flow') Save Flow
+      .button.export-button(@click='export_flow') Export Flow
 </template>
 
 <script lang='coffee'>
+import AppE from '../../app.coffee'
 import Element from './element.coffee'
+
+import FlowApi from './flow.api.coffee'
+  
 import ElementControl from './ElementControl.vue'
 import BorderBox from '../border-box/BorderBox.vue'
 
@@ -141,6 +136,24 @@ App =
     link_element: (element) ->
       @flow.link @element, element
       @update_target_element()
+    
+    save_flow: ->
+      # @app.loading()
+      @flow_api.save_flow(@flow)
+    
+    export_flow: ->
+      # 到处.flow文件
+      @flow.export()
+    
+    new_element: ->
+      # 新建 element
+      flow = @flow
+      con_ele = new Element null, 'Concate Element', 'concate', {}
+      element_idxs = Object.keys @flow.flow_tree
+      ele_map = element_idxs.map((idx) -> flow.flow_tree[idx]).filter(
+        (ele) -> ele.target_elements.length == 0
+      )
+      # 下发注册事件
 
 export default App
 </script>
