@@ -52,13 +52,13 @@ export default App
 <style lang='stylus'>
 @import '../../assets/core/color.styl'
 @import '../../assets/core/layout.styl'
+@import '../../assets/core/display.styl'
 @import './variable.styl'
 
 .element-flow
-  display flex
-  flex-direction column
-  justify-content flex-start
-  align-items center
+  @extend .inline-block
+  text-align center
+  min-width 100%
 
   .setup-button
     @extend .bg-info-darkest
