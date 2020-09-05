@@ -1,7 +1,7 @@
 import { Meta, Preview, Story } from '@storybook/addon-docs/blocks';
 
 import Card from './Card.vue';
-
+import TrendingCard from './TrendingCard.vue';
 
 <Meta title='component/Card' />
 
@@ -25,4 +25,28 @@ import Card from './Card.vue';
           <Card :style='{ border: "solid #eee 1px" }'>Base Card</Card>
         `
     }}</Story>
+</Preview>
+
+### TrendingCard
+
+流行面板展示卡片
+
+<Preview>
+    <Story
+        name='trending-card'
+        args={{
+            flowName: 'Thrending Flow'
+        }}
+    >
+        {((args, { argTypes }) => (
+            {
+                props: ['flowName'],
+                components: { TrendingCard },
+                template: `
+                    <trending-card
+                        :flowName='flowName'>
+                    </trending-card>`
+            }
+        )).bind({})}
+    </Story>
 </Preview>
