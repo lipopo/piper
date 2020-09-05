@@ -1,0 +1,27 @@
+import { Meta, Preview, Story } from '@storybook/addon-docs/blocks';
+
+import Carousel from './Carousel.vue';
+
+<Meta title='component/Carousel'/>
+
+## Carousel
+
+轮播组件库
+
+### BaseCarousel
+
+基础了轮播组件
+
+<Preview>
+    <Story
+        name='base-carousel'
+        args={{}}>{
+            ((args, { argTypes }) =>({
+                props: [],
+                components: { Carousel },
+                template: `
+                  <Carousel></Carousel>
+                `
+            })).bind({})
+        }</Story>
+</Preview>
