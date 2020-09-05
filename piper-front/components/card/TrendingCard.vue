@@ -3,7 +3,6 @@
   .trending-layout
     .trending-header
       .trending-title {{ flowName }}
-      .trending-control Control
     .trending-content
       .trending-img
         img(

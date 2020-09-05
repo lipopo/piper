@@ -10,7 +10,15 @@
         span Trending
     .p-sm-5
       Card.section-content.card-container
-        span Trending Section
+        Carousel(
+          @prev='() => {}'
+          @nex='() => {}'
+        )
+          template
+            trending-card(
+              flowName='d'
+              :style='{width: "12rem"}'
+            )
   
   .section.my-flow-section(v-if='!searching')
     .section-header
@@ -42,6 +50,8 @@
 <script lang='coffee'>
 import Icon from '../assets/icon/Icon.vue'
 import Card from '../components/card/Card.vue'
+import TrendingCard from '../components/card/TrendingCard.vue'
+import Carousel from '../components/carousel/Carousel.vue'
 import SearchBar from '../components/search-bar/SearchBar.vue'
 
 import AppE from '../app.coffee'
@@ -52,7 +62,9 @@ App =
   
   components: {
     Card,
+    Carousel,
     SearchBar,
+    TrendingCard,
     Icon
   }
 
