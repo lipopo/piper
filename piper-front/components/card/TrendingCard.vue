@@ -6,17 +6,30 @@
     .trending-content
       .trending-img
         img(
-           :alt='flowName'
-           :src='flowPath'
+            v-if='flowPath'
+            :alt='flowName'
+            :src='flowPath'
         )
+        Icon.icon(
+          v-else
+          iconName='chain-broken'
+          fontColor='#555'
+          :spin='false'
+        )
+
       .trending-info {{ flowInfo }}
     .trending-footer
       .button(@click='install') Install
 </template>
 
 <script lang='coffee'>
+import Icon from '../../assets/icon/Icon.vue'
 
 App = 
+  components: {
+    Icon
+  }
+
   props:
     # 流名称
     flowName:
@@ -41,9 +54,9 @@ App =
       type: String
       default: ''
 
-    methods:
-      install: ->
-        @$emit 'install', @flowId
+  methods:
+    install: ->
+      @$emit 'install', @flowId
 
 export default App
 </script>
@@ -83,6 +96,8 @@ export default App
         img 
           width 5rem
           height inherit 
+        .icon
+          font-size 5em
     
     .trending-footer
       width 100%
