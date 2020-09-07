@@ -69,8 +69,8 @@ export default {
       drawer_open: false,
       content: 'flow-page',
       base_menu_item: [
-        {name: 'Flow', icon:'random', icls: 'r-Z-90', page: 'flow-page'},
-        {name: 'Config', icon: 'cog', page: 'config-page'}
+        {name: 'Flow', icon:'random', icls: 'r-Z-90', page: 'flow-page'}
+        // {name: 'Config', icon: 'cog', page: 'config-page'}
       ],
       Color: Color,
       flash_list: [],
