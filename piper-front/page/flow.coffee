@@ -1,7 +1,11 @@
+import { trending_data } from '../assets/mock-data/mock-data.json'
+
+
 class Flow
   load_trending_data: ->
     # 加载流程的flow
-
+    trending_data
+    
   load_my_flow_data: ->
     # 加载私有的flow流文件
 

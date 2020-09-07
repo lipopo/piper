@@ -1,6 +1,7 @@
 import { Meta, Preview, Story } from '@storybook/addon-docs/blocks';
 
 import FlowBuilderPage from './FlowBuilder.vue';
+import Flow from './Flow.vue';
 import ConfigPage from './Config.vue';
 
 <Meta title='Page'/>
@@ -8,7 +9,6 @@ import ConfigPage from './Config.vue';
 # Page
 
 主要页面组合
-
 
 ## FlowBuilder Page
 
@@ -25,6 +25,20 @@ import ConfigPage from './Config.vue';
     }}</Story>
 </Preview>
 
+## Flow Page
+
+流页面，用于描述流的构建页面
+
+<Preview>
+    <Story name='flow'>{{
+        components: {
+            Flow
+        },
+        template: `
+            <Flow></Flow>
+        `
+    }}</Story>
+</Preview>
 
 ## Config Page
 
