@@ -124,7 +124,7 @@ export default {
 </script>
 
 <style lang='stylus'>
-@import './App.styl'
+@import './app.styl'
 
 .layout
   height 100%
