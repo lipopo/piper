@@ -2,6 +2,8 @@ import { Meta, Preview, Story } from '@storybook/addon-docs/blocks';
 
 import Card from './Card.vue';
 import TrendingCard from './TrendingCard.vue';
+import FlowCard from './FlowCard.vue';
+
 
 <Meta title='component/Card' />
 
@@ -49,4 +51,32 @@ import TrendingCard from './TrendingCard.vue';
             }
         )).bind({})}
     </Story>
+</Preview>
+
+### FlowCard
+
+展示已经创建的流的卡片
+
+<Preview>
+    <Story
+        name='flow-card'
+        args={{
+            flowName: 'BaseName',
+            imgPath: '',
+            updateTime: new Date(),
+            now: new Date()
+        }}
+        argTypes={{
+            now: {
+                control: 'date'
+            },
+            updateTime: {
+                control: 'date'
+            }
+        }}
+    >{((args, { argTypes }) => ({
+        components: { FlowCard },
+        props: ['flowName', 'imgPath', 'updateTime', 'now'],
+        template: `<flow-card :flowName='flowName' :imgPath='imgPath' :updateTime='updateTime' :now='now'></flow-card>`
+    })).bind({})}</Story>
 </Preview>
