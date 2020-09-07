@@ -1,0 +1,41 @@
+import { Meta, Preview, Story } from '@storybook/addon-docs/blocks';
+
+import Time from './Time.vue';
+
+
+<Meta title='component/Time' />
+
+
+## Time
+
+时间相关组件
+
+### BaseTime
+
+用于基于经验的渲染天数信息
+
+<Preview>
+    <Story
+        name='base-time'
+        args={{
+            time: new Date('2020-09-01T22:11:00.00+08:00'),
+            timeNow: new Date('2020-09-01T22:11:50.00+08:00')
+        }}
+        argTypes={{
+            time: {
+                control: 'date'
+            },
+            timeNow: {
+                control: 'date'
+            }
+        }}
+    >{((args, { argTypes }) => ({
+        components: { Time },
+        props: [
+            'time', 'timeNow'
+        ],
+        template: `
+            <Time :time='time' :timeNow='timeNow'></Time>
+        `
+    })).bind({})}</Story>
+</Preview>
