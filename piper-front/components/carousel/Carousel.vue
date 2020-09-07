@@ -45,6 +45,6 @@ export default App
   .carousel-medium
     @extend .p-sm-5
     flex-grow 1
-
+    overflow hidden
   
 </style>
