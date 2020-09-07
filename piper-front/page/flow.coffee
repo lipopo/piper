@@ -1,4 +1,4 @@
-import { trending_data } from '../assets/mock-data/mock-data.json'
+import { trending_data, my_flow_data } from '../assets/mock-data/mock-data.json'
 
 
 class Flow
@@ -8,6 +8,7 @@ class Flow
     
   load_my_flow_data: ->
     # 加载私有的flow流文件
+    my_flow_data
 
   search_flow: (val) ->
     # 按照字符搜索流的信息

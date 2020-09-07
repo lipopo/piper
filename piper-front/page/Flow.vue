@@ -28,14 +28,14 @@
                 )
 
   .section.my-flow-section(v-if='showing')
-    .section-header
+    .section-header.g-sm-10-b
       .section-title
         Icon.r-Z-90.g-sm-5(iconName='random' fontColor='#555')
         span My Flow
 
     .section-content
-      Card.item-card(v-for='my_item in my_flow_items')
-        div(v-html='my_item.content')
+      Card.item-card(v-for='item in my_flow_items')
+        flow-card(:flowName='item.name' :imgPath='item.img' :updateTime='item.update')
 
       div(@click='create_flow')
         Card.item-card.create-card
@@ -61,6 +61,7 @@
 <script lang='coffee'>
 import Icon from '../assets/icon/Icon.vue'
 import Card from '../components/card/Card.vue'
+import FlowCard from '../components/card/FlowCard.vue'
 import TrendingCard from '../components/card/TrendingCard.vue'
 import Carousel from '../components/carousel/Carousel.vue'
 import SearchBar from '../components/search-bar/SearchBar.vue'
@@ -79,7 +80,8 @@ App =
     SearchBar,
     TrendingCard,
     Icon,
-    FlowBuilderPage
+    FlowBuilderPage,
+    FlowCard
   }
 
   data: ->
@@ -167,11 +169,11 @@ export default App
       flex-wrap wrap
 
       .item-card
-        @extend .p-sm-5
         @extend .b-gray-light
         @extend .g-sm-5
         @extend .g-sm-5-b
 
+        padding 0
         border-width 1px
         border-style solid
 
