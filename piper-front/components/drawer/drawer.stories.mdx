@@ -14,7 +14,8 @@ import Drawer from './Drawer.vue';
 基础的抽屉组件，用于描述主要的抽屉信息
 
 <Preview>
-    <Story name="base-drawer">{{
+    <Story name="base-drawer">{
+        ((args, { argTypes }) => ({
         components: {
             Drawer
         },
@@ -40,5 +41,5 @@ import Drawer from './Drawer.vue';
                 open: true
             };
         }
-    }}</Story>
+    })).bind({})}</Story>
 </Preview>

@@ -1,37 +1,47 @@
 <template lang='pug'>
-div.element-container.b-info-darkest
-  template(v-if='idx !== undefined')
-    border-box.h-md-2(:type='top_border')
-    element-control.p-sm-1.element-control(
-      :idx='idx'
-      :element='element'
-      :canlink='can_link'
-      :layer='layer'
-      :position='position'
-      :bor_num='bor_num'
-      :child_num='target_elements.length'
-      :parent_num='source_elements.length'
-      @newele='add_sub_element'
-      @del='del_element'
-      @linkele='link_element'
-    )
+.element-container
+  .element-flex.b-info-darkest
+    template(v-if='idx !== undefined')
+      border-box.h-md-2(:type='top_border')
+      element-control.p-sm-1.element-control(
+        :idx='idx'
+        :element='element'
+        :canlink='can_link'
+        :layer='layer'
+        :position='position'
+        :bor_num='bor_num'
+        :child_num='target_elements.length'
+        :parent_num='source_elements.length'
+        @newele='add_sub_element'
+        @del='del_element'
+        @linkele='link_element'
+      )
+      border-box.h-md-2.border-bottom(:type='bottom_border')
+  
+      .element-children
+        template(v-for='ele, eleidx in target_elements')
+          element-container(
+            :flow='flow'
+            :idx='ele.idx'
+            :position='eleidx'
+            :layer='layer + 1'
+            :bor_num='target_elements.length'
+            @del_element='del_sub_element'
+          )
+        
+      .step-layer
+        //- step-layer 用于构建层级的下属层级，让其空白区域实现pad
+        border-box.b-info-darkest.step-border(:type='[9,11]')
 
-    border-box.h-md-2(:type='bottom_border')
-
-    div.element-children
-      template(v-for='ele, eleidx in target_elements')
-        element-container(
-          :flow='flow'
-          :idx='ele.idx'
-          :position='eleidx'
-          :layer='layer + 1'
-          :bor_num='target_elements.length'
-          @del_element='del_sub_element'
-        )
-
-    .g-md-5-t.flow-control(v-if='layer == 0')
-      .button.save-button(@click='save_flow') Save Flow
-      .button.export-button(@click='export_flow') Export Flow
+      template(v-if='layer == 0')
+        //- 首层增加concatenate layer
+        //- 用于分割下层的应用
+        .element-children
+  
+      .g-md-5-t.flow-control(v-if='layer == 0')
+        .button.save-button(@click='save_flow') Save Flow
+        .button.concatenate(@click='concate_flow') Concate Flow
+        .button.export-button(@click='export_flow') Export Flow
 </template>
 
 <script lang='coffee'>
@@ -73,6 +83,7 @@ App =
   data: ->
     target_elements: [] # 目标元素列表
     source_elements: [] # 源头元素表
+    concate_elements: [] # 断接层
 
   mounted: ->
     # setup target_elements
@@ -137,6 +148,11 @@ App =
       @flow.link @element, element
       @update_target_element()
     
+    concate_flow: ->
+      new_ele = new Element null, 'Concate Element', 'echo', {}
+      @flow.link(@element, new_ele)
+      @concate_elements.push new_ele
+
     save_flow: ->
       # @app.loading()
       @flow_api.save_flow(@flow)
@@ -164,10 +180,20 @@ export default App
 
 .element-container
   box-sizing border-box
-  height 100%
-  display flex
-  flex-direction column
-  align-items center
+  display inline-block
+
+  .element-flex
+    display flex
+    flex-direction column
+    align-items center
+    height 100% 
+
+    .step-layer
+      width 100%
+      flex-grow 1
+
+      .step-border
+        height 100%
 
 .element-control
   // @extend .g-md-5-b
@@ -176,12 +202,9 @@ export default App
 .element-children
   display flex
   flex-direction row
-  align-items flex-start
-  justify-content flex-start
 
 .flow-control
   display flex
-  align-items center
 
   .button
     @extend .bg-info-darkest

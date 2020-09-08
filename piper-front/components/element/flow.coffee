@@ -82,6 +82,9 @@ class Flow
       return false
     else
       return true
+  
+  render: ->
+    # flow render
 
   export: ->
     # 导出flow
