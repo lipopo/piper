@@ -20,12 +20,14 @@
         )
           .trending-row
             .trending-scroll-row(:style='{left: `-${trending_left}%`}')
-              template(v-for='trending_item in trending_items')
+              template(v-for='trending_item, idx in trending_items')
                 trending-card(
                   :flowName='trending_item.name'
                   @install='install_flow'
                   :style='{minWidth: "20%"}'
                 )
+                .split(v-if='idx < trending_items.length - 1')
+                  split-line(direction='column' type='gray' :padLevel='10')
 
   .section.my-flow-section(v-if='showing')
     .section-header.g-sm-10-b
@@ -65,6 +67,7 @@ import FlowCard from '../components/card/FlowCard.vue'
 import TrendingCard from '../components/card/TrendingCard.vue'
 import Carousel from '../components/carousel/Carousel.vue'
 import SearchBar from '../components/search-bar/SearchBar.vue'
+import SplitLine from '../components/split-line/SplitLine.vue'
 import FlowBuilderPage from './FlowBuilder.vue'
 
 import AppE from '../app.coffee'
@@ -78,6 +81,7 @@ App =
     Card,
     Carousel,
     SearchBar,
+    SplitLine,
     TrendingCard,
     Icon,
     FlowBuilderPage,

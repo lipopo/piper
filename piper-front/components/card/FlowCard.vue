@@ -4,8 +4,8 @@
     .flow-card-header
       .flow-title.p-sm-5(v-if='flowName') {{ flowName }}
     .flow-card-content
-      .flow-img(v-if='img')
-        img
+      .flow-img(v-if='imgPath')
+        img(:src='imgPath')
       .flow-icon(v-else)
         Icon(iconName='chain-broken' fontColor='#555' :spin='false')
     .flow-card-footer
@@ -53,8 +53,8 @@ export default App
 
 .flow-card
   display inline-block
-  width 100%
   height 100%
+  width 100%
 
   .flow-card-layout
     display flex

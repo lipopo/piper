@@ -1,0 +1,57 @@
+import { Meta, Preview, Story } from '@storybook/addon-docs/blocks';
+
+import SplitLine from './SplitLine.vue';
+
+
+<Meta title='component/SplitLine' />
+
+
+## SplitLine
+
+分割线组件
+
+<Preview>
+    <Story name='split-line'
+        args={{
+            direction: 'row',
+            padLevel: 5,
+            padType: 'sm'
+        }}
+        argTypes={{
+            direction: {
+                control: {
+                    type: 'inline-radio',
+                    options: [
+                        'row', 'column'
+                    ]
+                }
+            },
+            padLevel: {
+                control: {
+                    type: 'range',
+                    min: 1,
+                    max: 10,
+                    step: 1
+                }
+            },
+            padType: {
+                control: {
+                    type: 'inline-radio',
+                    options: [
+                        'sm', 'md', 'lg'
+                    ]
+                }
+            }
+        }}
+    >{((args, { argTypes }) => ({
+        props: [ 'direction', 'padLevel', 'padType' ],
+        components: {
+            SplitLine
+        },
+        template: `
+        <div :style="{ height: direction === 'column' ? '12rem': 0 }">
+            <split-line :direction='direction' :padLevel='padLevel' :padType='padType'></split-line>
+        </div>
+        `
+    })).bind({})}</Story>
+</Preview>
